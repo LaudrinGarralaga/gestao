@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\PermissionRole;
 use App\Permission;
 use App\Role;
@@ -11,11 +12,19 @@ class PermissionRoleController extends Controller {
 
     public function index() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $proles = PermissionRole::paginate(10);
         return view('listas.prole_list', compact('proles'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // indica inclusão
         $acao = 1;
@@ -27,6 +36,10 @@ class PermissionRoleController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // recupera todos os campos do formulário
         $dados = $request->all();
@@ -46,6 +59,10 @@ class PermissionRoleController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = PermissionRole::find($id);
 
@@ -60,6 +77,10 @@ class PermissionRoleController extends Controller {
 
     public function update(Request $request, $id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reg = PermissionRole::find($id);
         $dados = $request->all();
         $alt = $reg->update($dados);
@@ -70,6 +91,11 @@ class PermissionRoleController extends Controller {
     }
 
     public function destroy($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $prole = PermissionRole::find($id);
         if ($prole->delete()) {
             return redirect()->route('proles.index')
@@ -79,11 +105,20 @@ class PermissionRoleController extends Controller {
 
     public function pesq() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = Carro::paginate(3);
         return view('carros_pesq', compact('carros'));
     }
 
     public function filtro(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -100,6 +135,11 @@ class PermissionRoleController extends Controller {
     }
 
     public function filtro2(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -115,6 +155,11 @@ class PermissionRoleController extends Controller {
     }
 
     public function graf() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = DB::table('carros')
                 ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
                 ->select('marcas.nome as marca', DB::raw('count(*) as num'))

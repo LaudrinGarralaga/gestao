@@ -39,7 +39,7 @@
             <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> Membro</span>
-                <select class="form-control" id="user_id" name="user_id">
+                <select class="form-control" id="user_id" name="user_id" >
                     @foreach ($users as $user)    
                     <option value="{{$user->id}}" 
                             @if ((isset($reg) && $reg->user_id==$user->id) 
@@ -51,7 +51,7 @@
             <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i> Equipe</span>
-                <select class="form-control" id="equipe_id" name="equipe_id" disabled="true">
+                <select class="form-control" id="equipe_id" name="equipe_id" >
                     @foreach ($equipes as $equipe)    
                     <option value="{{$equipe->id}}" 
                             @if ((isset($reg) && $reg->equipe_id==$equipe->id) 
@@ -65,7 +65,9 @@
         </form>    
     </form>
 </div>
-
+<script>
+//$('#equipe_id option:not(:selected)').attr('disabled', true);
+</script>
 @endsection
 
 

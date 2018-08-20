@@ -29,11 +29,11 @@
                 <td> {{$equipe->id}} </td>
                 <td> {{$equipe->descricao}} </td>
                 <td> {{$equipe->area->sigla}} </td>
-                <td><a href='{{route('equipes.adicionar', $equipe->id)}}'
+                <td><a href='{{route('equipesmembros.create', $equipe->id)}}'
                        class='btn btn-success' 
                        role='button'> <span class="glyphicon glyphicon-plus"></span> Adicionar 
                     </a>
-                    <a href='{{route('equipes.detalhes')}}'
+                    <a href='{{route('equipes.detalhes', $equipe->id)}}'
                        class='btn btn-primary' 
                        role='button'> <span class="glyphicon glyphicon-list"></span> Detalhes 
                     </a>

@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Equipe;
 use App\Area;
 use App\User;
+use App\Membrosequipe;
 
 class EquipeController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         //$areas = Area::where('user_id', auth()->user()->id)->get();
         $equipes = Equipe::paginate(10);
@@ -18,6 +25,10 @@ class EquipeController extends Controller {
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // indica inclusão
         $acao = 1;
@@ -28,6 +39,10 @@ class EquipeController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // recupera todos os campos do formulário
         $dados = $request->all();
@@ -46,6 +61,10 @@ class EquipeController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = Equipe::find($id);
 
@@ -58,6 +77,10 @@ class EquipeController extends Controller {
     }
 
     public function update(Request $request, $id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $reg = Equipe::find($id);
 
@@ -73,6 +96,10 @@ class EquipeController extends Controller {
 
     public function destroy($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $equipe = Equipe::find($id);
 
         if ($equipe->delete()) {
@@ -81,15 +108,28 @@ class EquipeController extends Controller {
         }
     }
 
-    public function adicionar($id) {
+    /*public function adicionar($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+        $reg = Equipe::find($id);
 
         // indica inclusão
         $acao = 1;
-        
+
         $users = User::orderBy('name')->get();
         $equipes = Equipe::orderBy('nome')->get();
 
-        return view('formularios.equipemembros_form', compact('acao', 'users', 'equipes'));
+        return view('formularios.equipemembros_form', compact('acao', 'users', 'equipes', 'reg'));
+    }*/
+
+    public function detalhes($id) {
+
+        $equipemembros = Membrosequipe::where('equipe_id', '=', $id)->get();
+        //$equipemembros = Membrosequipe::find(2);
+
+        return view('listas.equipedetalhes_list', compact('equipemembros'));
     }
 
 }

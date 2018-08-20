@@ -16,7 +16,6 @@ class CreateMembrosequipesTable extends Migration {
             $table->boolean('responsavel');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('equipe_id');
-            $table->timestamps();
         });
 
 

@@ -27,11 +27,9 @@ Route::resource('users', 'UserController');
 Route::resource('fluxos', 'FluxoController');
 Route::resource('equipes', 'EquipeController');
 Route::resource('equipesmembros', 'MembrosEquipeController');
-Route::get('euipesmembros/{id}', 'EquipeController@Adicionar')
+Route::get('equipemembro/{id}', 'EquipeController@Adicionar')
         ->name('equipes.adicionar');
-Route::post('carrosfotostore', 'CarroController@storefoto')
-        ->name('carros.storefoto');
-Route::post('equipedetalhes', 'EquipeController@detalhes')
+Route::get('equipedetalhes/{id}', 'EquipeController@detalhes')
         ->name('equipes.detalhes');
 
 

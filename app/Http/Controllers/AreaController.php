@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Area;
 use App\User;
 
 class AreaController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         //$areas = Area::where('user_id', auth()->user()->id)->get();
         $areas = Area::paginate(10);
@@ -18,6 +23,10 @@ class AreaController extends Controller {
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // indica inclusão
         $acao = 1;
@@ -28,6 +37,10 @@ class AreaController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $area = new Area;
         $area->sigla = $request->sigla;
@@ -47,6 +60,10 @@ class AreaController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = Area::find($id);
 
@@ -63,6 +80,10 @@ class AreaController extends Controller {
     }
 
     public function update(Request $request, $id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $reg = Area::find($id);
 
@@ -81,6 +102,11 @@ class AreaController extends Controller {
     }
 
     public function destroy($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $area = Area::find($id);
         if ($area->delete()) {
             return redirect()->route('areas.index')
@@ -90,11 +116,20 @@ class AreaController extends Controller {
 
     public function pesq() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = Carro::paginate(3);
         return view('carros_pesq', compact('carros'));
     }
 
     public function filtro(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -111,6 +146,11 @@ class AreaController extends Controller {
     }
 
     public function filtro2(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -126,6 +166,11 @@ class AreaController extends Controller {
     }
 
     public function graf() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = DB::table('carros')
                 ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
                 ->select('marcas.nome as marca', DB::raw('count(*) as num'))

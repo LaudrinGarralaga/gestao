@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Role;
 
 class RoleController extends Controller {
@@ -15,11 +16,19 @@ class RoleController extends Controller {
 
     public function index() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $niveis = $this->role::paginate(5);
         return view('listas.nivel_list', compact('niveis'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // indica inclusão
         $acao = 1;
@@ -28,6 +37,10 @@ class RoleController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // recupera todos os campos do formulário
         $dados = $request->all();
@@ -45,6 +58,10 @@ class RoleController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = Role::find($id);
 
@@ -54,6 +71,10 @@ class RoleController extends Controller {
     }
 
     public function update(Request $request, $id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $reg = Role::find($id);
         $dados = $request->all();
@@ -65,6 +86,11 @@ class RoleController extends Controller {
     }
 
     public function destroy($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $nivel = Role::find($id);
         if ($nivel->delete()) {
             return redirect()->route('niveis.index')
@@ -74,11 +100,20 @@ class RoleController extends Controller {
 
     public function pesq() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = Carro::paginate(3);
         return view('carros_pesq', compact('carros'));
     }
 
     public function filtro(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -95,6 +130,11 @@ class RoleController extends Controller {
     }
 
     public function filtro2(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -110,6 +150,11 @@ class RoleController extends Controller {
     }
 
     public function graf() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = DB::table('carros')
                 ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
                 ->select('marcas.nome as marca', DB::raw('count(*) as num'))

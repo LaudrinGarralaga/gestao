@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Role;
@@ -11,6 +12,10 @@ use App\RoleUser;
 class RegraController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         /* $rusers = DB::table('role_user')
           ->join('roles', 'role_user.id', '=', 'roles.id')
@@ -26,6 +31,10 @@ class RegraController extends Controller {
 
     public function create() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // indica inclusão
         $acao = 1;
 
@@ -37,6 +46,10 @@ class RegraController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         /*
           $role_id = $request->input('role_id');
@@ -64,6 +77,10 @@ class RegraController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = RoleUser::find($id);
 
@@ -78,6 +95,10 @@ class RegraController extends Controller {
 
     public function update(Request $request, $id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reg = RoleUser::find($id);
         $dados = $request->all();
         $alt = $reg->update($dados);
@@ -88,9 +109,13 @@ class RegraController extends Controller {
     }
 
     public function destroy($id) {
-        
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $regra = RoleUser::find($id);
-        
+
         if ($regra->delete()) {
             return redirect()->route('rusers.index')
                             ->with('status', $regra->id . ' Excluído!');
@@ -98,6 +123,10 @@ class RegraController extends Controller {
     }
 
     public function foto($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // obtém os dados do registro a ser exibido
         $reg = Carro::find($id);
@@ -107,6 +136,11 @@ class RegraController extends Controller {
     }
 
     public function storefoto(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // recupera todos os campos do formulário
         $dados = $request->all();
         $id = $dados['id'];
@@ -119,6 +153,11 @@ class RegraController extends Controller {
     }
 
     public function pesq() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // se não estiver autenticado, redireciona para login
         if (!Auth::check()) {
             return redirect('/');
@@ -128,6 +167,11 @@ class RegraController extends Controller {
     }
 
     public function filtro(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -144,6 +188,11 @@ class RegraController extends Controller {
     }
 
     public function filtro2(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém dados do form de pesquisa
         $modelo = $request->modelo;
         $precomax = $request->precomax;
@@ -159,6 +208,11 @@ class RegraController extends Controller {
     }
 
     public function graf() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $carros = DB::table('carros')
                 ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
                 ->select('marcas.nome as marca', DB::raw('count(*) as num'))

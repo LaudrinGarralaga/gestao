@@ -4,22 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Area;
 use App\User;
 use App\Membrosequipe;
 use App\Equipe;
+use Illuminate\Support\Facades\Redirect;
 
 class MembrosequipeController extends Controller {
 
     public function index() {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         //$areas = Area::where('user_id', auth()->user()->id)->get();
         $equipemembros = Membrosequipe::paginate(10);
 
-        return view('listas.equipemembros_list', compact('equipemembros'));
+        return view('listas.equipedetalhes_list', compact('equipemembros'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // indica inclusão
         $acao = 1;
@@ -31,6 +41,10 @@ class MembrosequipeController extends Controller {
     }
 
     public function store(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         // recupera todos os campos do formulário
         $dados = $request->all();
@@ -49,6 +63,10 @@ class MembrosequipeController extends Controller {
 
     public function edit($id) {
 
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // obtém os dados do registro a ser editado 
         $reg = Area::find($id);
 
@@ -56,10 +74,16 @@ class MembrosequipeController extends Controller {
         $acao = 2;
 
         $users = User::orderBy('name')->get();
-        return view('formularios.area_form', compact('reg', 'acao', 'users'));
+        $equipes = Equipe::orderBy('nome')->get();
+
+        return view('formularios.area_form', compact('reg', 'acao', 'users', 'equipes'));
     }
 
     public function update(Request $request, $id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $reg = Area::find($id);
 
@@ -72,57 +96,15 @@ class MembrosequipeController extends Controller {
     }
 
     public function destroy($id) {
-        $area = Area::find($id);
-        if ($area->delete()) {
-            return redirect()->route('areas.index')
-                            ->with('status', $area->sigla . ' Excluído!');
+
+        if (!Auth::check()) {
+            return redirect('/');
         }
-    }
 
-    public function pesq() {
-
-        $carros = Carro::paginate(3);
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function filtro(Request $request) {
-        // obtém dados do form de pesquisa
-        $modelo = $request->modelo;
-        $precomax = $request->precomax;
-        $cond = array();
-        if (!empty($modelo)) {
-            array_push($cond, array('modelo', 'like', '%' . $modelo . '%'));
+        $membroequipes = Membrosequipe::find($id);
+        if ($membroequipes->delete()) {
+            return Redirect::back()->with('status', 'Membro Removido !');
         }
-        if (!empty($precomax)) {
-            array_push($cond, array('preco', '<=', $precomax));
-        }
-        $carros = Carro::where($cond)
-                        ->orderBy('modelo')->paginate(3);
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function filtro2(Request $request) {
-        // obtém dados do form de pesquisa
-        $modelo = $request->modelo;
-        $precomax = $request->precomax;
-        if (empty($precomax)) {
-            $carros = Carro::where('modelo', 'like', '%' . $modelo . '%')
-                            ->orderBy('modelo')->paginate(3);
-        } else {
-            $carros = Carro::where('modelo', 'like', '%' . $modelo . '%')
-                            ->where('preco', '<=', $precomax)
-                            ->orderBy('modelo')->paginate(3);
-        }
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function graf() {
-        $carros = DB::table('carros')
-                ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
-                ->select('marcas.nome as marca', DB::raw('count(*) as num'))
-                ->groupBy('marcas.nome')
-                ->get();
-        return view('carros_graf', compact('carros'));
     }
 
 }
