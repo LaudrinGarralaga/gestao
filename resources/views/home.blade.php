@@ -20,14 +20,14 @@
         </div>
         @can('adm')
         <div class="col-sm-6" style="margin-bottom: 20px">
-            <a href='#' role="button" class="btn btn-info" style="width: 500px">
+            <a href='{{route('fluxos.index')}}' role="button" class="btn btn-info" style="width: 500px">
                 Total de Fluxos <span class="badge badge-light">{{$totalFluxos}}</span>
                 <img src="document.png" class="rounded-circle" alt="Cinque Terre" width="100px">
             </a>   
         </div>
         @else
         <div class="col-sm-6" style="margin-bottom: 20px">
-            <a href='#' role="button" class="btn btn-info" style="width: 500px">
+            <a href="{{route('fluxos.index')}}" role="button" class="btn btn-info" style="width: 500px">
                 Meus Fluxos <span class="badge badge-light">{{$totalFluxos}}</span>
                 <img src="document.png" class="rounded-circle" alt="Cinque Terre" width="100px">
             </a>   

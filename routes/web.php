@@ -12,13 +12,14 @@
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('niveis', 'RoleController');
+Route::resource('etapas', 'EtapaController');
 Route::resource('permissoes', 'PermissionController');
 Route::resource('areas', 'AreaController');
 Route::resource('proles', 'PermissionRoleController');

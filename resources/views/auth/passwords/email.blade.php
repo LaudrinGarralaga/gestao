@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('auth.templates.template')
 
 @section('content-form')
 

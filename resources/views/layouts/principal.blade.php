@@ -29,13 +29,14 @@
                         </ul>
                     </li>
                     @can('adm')
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> Configuração Acesso <span class="caret"></span></a>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> Configurações de Acesso <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('rusers.index')}}"><span class="glyphicon glyphicon-user"></span> Nível/Usuário</a></li>
                                 <li><a href="{{route('proles.index')}}"><span class="glyphicon glyphicon-lock"></span> Permissão/Nível</a></li>
                             </ul>
                         </li>
                     @endcan
+                    <li class="active"><a href="{{route('etapas.index')}}"><span class="glyphicon glyphicon-list-alt"></span> Etapa</a></li>
                     <li class="active"><a href="#"><span class="glyphicon glyphicon-earphone"></span> Contato</a></li>
                     <li class="active"><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Sobre</a></li>
                 </ul>

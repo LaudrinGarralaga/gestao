@@ -6,7 +6,7 @@
     {{ csrf_field() }}
 
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-       
+
         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Login">
 
         @if ($errors->has('email'))
@@ -32,6 +32,10 @@
         <button type="submit" class="btn btn-login">
             <i class="fa fa-btn fa-sign-in"></i> Login
         </button>
+    </div>
+    <div class='form-group'>
+        <a href='{{route('register')}}' class='btn btn-login' 
+           role='button'><span class="glyphicon glyphicon-user"></span> Registrar </a>
     </div>
 
     <div class="form-group text-right">
