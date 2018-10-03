@@ -7,11 +7,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
     </head>
     <body>
 
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid"> 
+        <nav class="nav-side-menu">
+            <div class="menu-list"> 
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Gestão de Fluxos</a>
                 </div>
@@ -37,15 +38,14 @@
                         </li>
                     @endcan
                     <li class="active"><a href="{{route('etapas.index')}}"><span class="glyphicon glyphicon-list-alt"></span> Etapa</a></li>
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-earphone"></span> Contato</a></li>
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Sobre</a></li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} </a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
-    document.getElementById('logout-form').submit();">
+                            document.getElementById('logout-form').submit();">
                             <span class="glyphicon glyphicon-log-in"></span> Sair
                         </a>
 
@@ -60,12 +60,7 @@
         <main class="py-4">
             @yield('conteudo')
 
-            <div class="footer text-center" style="position:absolute;bottom:0;width:100%;background-color: #000" >
-                <p style="color: white">Copyright © 2018 CPTE. Todos os direitos reservados.</p>
-
-            </div>
         </main>
     </body>
 
 </html>
-

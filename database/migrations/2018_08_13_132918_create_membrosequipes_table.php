@@ -13,7 +13,7 @@ class CreateMembrosequipesTable extends Migration {
      */
     public function up() {
         Schema::create('membrosequipes', function (Blueprint $table) {
-            $table->boolean('responsavel');
+            $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('equipe_id');
         });

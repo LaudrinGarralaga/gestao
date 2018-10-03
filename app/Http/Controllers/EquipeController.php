@@ -19,8 +19,8 @@ class EquipeController extends Controller {
         }
 
         //$areas = Area::where('user_id', auth()->user()->id)->get();
-        $equipes = Equipe::paginate(10);
-
+        $equipes = Equipe::All();
+        
         return view('listas.equipe_list', compact('equipes'));
     }
 
@@ -34,8 +34,9 @@ class EquipeController extends Controller {
         $acao = 1;
 
         $areas = Area::orderBy('sigla')->get();
+        $responsaveis = User::orderBy('name')->get();
 
-        return view('formularios.equipe_form', compact('acao', 'areas'));
+        return view('formularios.equipe_form', compact('acao', 'areas', 'responsaveis'));
     }
 
     public function store(Request $request) {
@@ -72,8 +73,9 @@ class EquipeController extends Controller {
         $acao = 2;
 
         $areas = Area::orderBy('sigla')->get();
+        $responsaveis = User::orderBy('name')->get();
 
-        return view('formularios.equipe_form', compact('reg', 'acao', 'areas'));
+        return view('formularios.equipe_form', compact('reg', 'acao', 'areas', 'responsaveis'));
     }
 
     public function update(Request $request, $id) {

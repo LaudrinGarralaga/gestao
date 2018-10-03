@@ -18,7 +18,7 @@ class MembrosequipeController extends Controller {
         if (!Auth::check()) {
             return redirect('/');
         }
-
+        
         //$areas = Area::where('user_id', auth()->user()->id)->get();
         $equipemembros = Membrosequipe::paginate(10);
 
@@ -100,6 +100,7 @@ class MembrosequipeController extends Controller {
         if (!Auth::check()) {
             return redirect('/');
         }
+        dd($id);
 
         $membroequipes = Membrosequipe::find($id);
         if ($membroequipes->delete()) {

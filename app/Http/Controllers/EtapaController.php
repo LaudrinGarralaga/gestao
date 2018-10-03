@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Area;
 use App\Etapa;
 use App\Fluxo;
-use App\Area;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EtapaController extends Controller {
+class EtapaController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -22,7 +24,8 @@ class EtapaController extends Controller {
         return view('listas.etapa_list', compact('etapas'));
     }
 
-    public function create() {
+    public function create()
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -37,39 +40,42 @@ class EtapaController extends Controller {
         return view('formularios.etapa_form', compact('acao', 'areas', 'fluxos'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
         }
-        
+
         // recupera todos os campos do formulário
         $dados = $request->all();
         // insere os dados na tabela
         $etapas = Etapa::create($dados);
-        
+
         if ($etapas) {
             return redirect()->route('etapas.index')
-                            ->with('status', $request->sigla . ' Incluído!');
+                ->with('status', $request->sigla . ' Incluído!');
         }
     }
 
-    public function show($id) {
-        
+    public function show($id)
+    {
+
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
         }
 
-        // obtém os dados do registro a ser editado 
+        // obtém os dados do registro a ser editado
         $reg = Etapa::find($id);
 
         /* if (Gate::denies('Atu_Area', $reg)) {
-          abort(403, 'Não autorizado');
-          }
+        abort(403, 'Não autorizado');
+        }
          */
 
         // indica ao form que será alteração
@@ -77,11 +83,12 @@ class EtapaController extends Controller {
 
         $areas = Area::orderBy('sigla')->get();
         $fluxos = Fluxo::orderBy('descricao')->get();
-        
+
         return view('formularios.etapa_form', compact('reg', 'acao', 'areas', 'fluxos'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -90,20 +97,21 @@ class EtapaController extends Controller {
         $reg = Etapa::find($id);
 
         /*
-          if (Gate::denies('Atu_Area', $reg)) {
-          abort(403, 'Não autorizado');
-          }
+        if (Gate::denies('Atu_Area', $reg)) {
+        abort(403, 'Não autorizado');
+        }
          */
 
         $dados = $request->all();
         $alt = $reg->update($dados);
         if ($alt) {
             return redirect()->route('etapas.index')
-                            ->with('status', $request->sigla . ' Alterado!');
+                ->with('status', $request->sigla . ' Alterado!');
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -112,7 +120,7 @@ class EtapaController extends Controller {
         $etapa = Etapa::find($id);
         if ($etapa->delete()) {
             return redirect()->route('etapas.index')
-                            ->with('status', $etapa->sigla . ' Excluído!');
+                ->with('status', $etapa->sigla . ' Excluído!');
         }
     }
 

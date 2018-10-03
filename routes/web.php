@@ -32,6 +32,16 @@ Route::get('equipemembro/{id}', 'EquipeController@Adicionar')
         ->name('equipes.adicionar');
 Route::get('equipedetalhes/{id}', 'EquipeController@detalhes')
         ->name('equipes.detalhes');
+Route::get('fluxodetalhes/{id}', 'FluxoController@detalhes')
+->name('fluxos.detalhes');
+Route::get('fluxoadicionar/{id}', 'FluxoController@adicionar')
+->name('fluxos.adicionar');
+Route::post('fluxoadicionarsalvar/{id}', 'FluxoController@adicionarSalvar')
+->name('fluxoatividade.adicionarSalvar');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

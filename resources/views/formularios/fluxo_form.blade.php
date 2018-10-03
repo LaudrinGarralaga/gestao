@@ -1,21 +1,16 @@
-@extends('layouts.principal')
+@extends('adminlte::page')
 
-@section('conteudo')
+@section('title', 'Cadastro de Fluxo')
 
-<div class="container">
-    <div class='col-sm-11'>
-        @if ($acao == 1)
-        <h2> Fomulário de Fluxos </h2>
-        @else 
-        <h2> Alteração de Fluxos </h2>
-        @endif
-    </div>
-    <div class='col-sm-1'>
-        <a href='{{route('fluxos.index')}}' class='btn btn-primary' 
-           role='button'><span class="glyphicon glyphicon-arrow-left"></span> Voltar </a>
-    </div>
-</div>
+@section('content_header')
+@if ($acao == 1)
+    <h2> Cadastro de Fluxos </h2>
+@else 
+    <h2> Alteração de Fluxos </h2>
+@endif
+@stop
 
+@section('content')
 <div class="col-sm-12">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -28,27 +23,30 @@
     @endif    
 </div>
 
-<div class='container'>
     @if ($acao == 1)
+    <div class="box box-primary">
+            <div class="box-body">
     <form method="post" action="{{route('fluxos.store')}}">
         @else 
+        <div class="box box-primary">
+                <div class="box-body">
         <form method="post" action="{{route('fluxos.update', $reg->id)}}">
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
                 <input type="text" class="form-control" id="descricao" 
                        name="descricao" placeholder="Descrição"
                        value="{{$reg->descricao or old('descricao')}}"                   
                        required>
-            </div> 
-            <br>
+            </div>
+        </div>     
+        </div>
             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
         </form>    
     </form>
-</div>
+
 
 @endsection
 

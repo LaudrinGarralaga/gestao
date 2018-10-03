@@ -17,10 +17,12 @@ class CreateEquipesTable extends Migration {
             $table->string('nome');
             $table->string('descricao');
             $table->unsignedInteger('area_id');
+            $table->unsignedInteger('responsavel');
         });
 
         Schema::table('equipes', function (Blueprint $table) {
             $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('responsavel')->references('id')->on('users');
         });
     }
 

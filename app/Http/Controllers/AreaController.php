@@ -76,7 +76,8 @@ class AreaController extends Controller {
         $acao = 2;
 
         $users = User::orderBy('name')->get();
-        return view('formularios.area_form', compact('reg', 'acao', 'users'));
+        $responsaveis = User::orderBy('name')->get();
+        return view('formularios.area_form', compact('reg', 'acao', 'users', 'responsaveis'));
     }
 
     public function update(Request $request, $id) {

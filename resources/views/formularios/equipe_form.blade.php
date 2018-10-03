@@ -1,74 +1,111 @@
-@extends('layouts.principal')
+@extends('adminlte::page')
 
-@section('conteudo')
+@section('title', 'Cadastro de Equipes')
 
-<div class="container">
-    <div class='col-sm-11'>
-        @if ($acao == 1)
-        <h2> Fomulário de Equipes </h2>
-        @else 
-        <h2> Alteração de Equipes </h2>
-        @endif
-    </div>
-    <div class='col-sm-1'>
-        <a href='{{route('equipes.index')}}' class='btn btn-primary' 
-           role='button'><span class="glyphicon glyphicon-arrow-left"></span> Voltar </a>
-    </div>
-</div>
+@section('content_header')
+@if ($acao == 1)
+    <h2> Cadastro de Equipes </h2>
+@else 
+    <h2> Alteração de Equipes </h2>
+@endif
+@stop
 
+@section('content')
 <div class="col-sm-12">
     @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif    
 </div>
 
-<div class='container'>
+
     @if ($acao == 1)
+    <div class="box box-primary">
+        <div class="box-body">
     <form method="post" action="{{route('equipes.store')}}">
         @else 
+        <div class="box box-primary">
+            <div class="box-body">
         <form method="post" action="{{route('equipes.update', $reg->id)}}">
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <br>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-                <input type="text" class="form-control" id="nome" 
-                       name="nome" placeholder="Nome"
-                       value="{{$reg->nome or old('nome')}}"
-                       required>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="nome">Nome da Equipe:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-flag"></i>
+                        </div>
+                        <input type="text" class="form-control" id="nome" 
+                            name="nome" placeholder="Digite o nome da equipe"
+                            value="{{$reg->nome or old('nome')}}"
+                            required>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-                <input type="text" class="form-control" id="descricao" 
-                       name="descricao" placeholder="Descrição"
-                       value="{{$reg->descricao or old('descricao')}}"                   
-                       required>
-            </div> 
-            <br>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i> Área</span>
-                <select class="form-control" id="area_id" name="area_id">
-                    @foreach ($areas as $area)    
-                    <option value="{{$area->id}}" 
-                            @if ((isset($reg) && $reg->area_id==$area->id) 
-                            or old('area_id') == $area->id) selected @endif>
-                            {{$area->sigla}}</option>
-                    @endforeach    
-                </select>
+            
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="nome">Descrição da Equipe:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-info"></i>
+                        </div>
+                        <input type="text" class="form-control" id="descricao" 
+                            name="descricao" placeholder="Digite a descrição da equipe"
+                            value="{{$reg->descricao or old('descricao')}}"                   
+                            required>
+                    </div>
+                </div>
             </div>
-            <br>
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
-        </form>    
-    </form>
-</div>
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="nome">Área:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </div>
+                        <select class="form-control" id="area_id" name="area_id">
+                            @foreach ($areas as $area)    
+                            <option value="{{$area->id}}" 
+                                    @if ((isset($reg) && $reg->area_id==$area->id) 
+                                    or old('area_id') == $area->id) selected @endif>
+                                    {{$area->sigla}}</option>
+                            @endforeach    
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nome">Responsável pela Equipe:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </div>          
+                            <select class="form-control" id="user_id" name="user_id" >
+                                @foreach ($responsaveis as $responsavel)    
+                                <option value="{{$responsavel->id}}" 
+                                        @if ((isset($reg) && $reg->user_id==$responsavel->id) 
+                                        or old('responsavel') == $responsavel->id) selected @endif>
+                                        {{$responsavel->name}}</option>
+                                @endforeach    
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
+    </form>    
+</form>
 
 @endsection
 

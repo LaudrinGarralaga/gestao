@@ -1,5 +1,7 @@
 @extends('layouts.principal')
 
+@section('title', 'Cadastro de Etapas')
+
 @section('conteudo')
 
 <div class="container">
