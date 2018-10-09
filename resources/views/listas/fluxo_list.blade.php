@@ -78,11 +78,7 @@
                                          @endforeach
                                     </tbody>
                                     <tfoot>
-                                       <tr>
-                                         <th rowspan="1" colspan="1">ID</th>
-                                         <th rowspan="1" colspan="1">Descrição</th>                               
-                                         <th rowspan="1" colspan="1">Ações</th>
-                                        </tr> 
+                                       
                                     </tfoot>
                             </table>
                     </div>

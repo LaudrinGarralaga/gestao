@@ -44,4 +44,9 @@ class User extends Authenticatable {
         return $this->roles->contains('name', $roles);
     }
 
+    public function equipe() {
+        return $this->belongsTo('App\Equipe');
+    }
+
+
 }

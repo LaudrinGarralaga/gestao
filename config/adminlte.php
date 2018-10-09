@@ -117,7 +117,7 @@ return [
        
         'CADASTROS',
         [
-            'text' => 'Área',
+            'text' => 'Área/Departamento',
             'url'  => 'areas',
             'icon' => 'globe',
         ],

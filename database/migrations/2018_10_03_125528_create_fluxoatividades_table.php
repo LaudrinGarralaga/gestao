@@ -17,7 +17,7 @@ class CreateFluxoatividadesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('equipe_id');
             $table->unsignedInteger('fluxo_id');
-            $table->string('atividade', 200);
+            $table->integer('precedencia');
         });
 
         Schema::table('fluxoatividades', function (Blueprint $table) {

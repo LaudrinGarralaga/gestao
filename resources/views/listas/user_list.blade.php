@@ -43,6 +43,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data de Cadastro</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário de Cadastro</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                     </tr>
                                 </thead>
@@ -51,7 +52,8 @@
                                     <tr>
                                         <td> {{$user->id}} </td>
                                         <td> {{$user->name}} </td>
-                                        <td> {{$user->created_at}} </td>
+                                        <td> {{Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}} </td>
+                                        <td> {{Carbon\Carbon::parse($user->created_at)->format('h:m:s')}} </td>
                                         <td><a href='{{route('users.edit', $user->id)}}'
                                                 class='btn btn-warning' 
                                                 role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
@@ -70,12 +72,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">ID</th>
-                                    <th rowspan="1" colspan="1">Nome</th>
-                                    <th rowspan="1" colspan="1">Data de Cadastro</th>
-                                    <th rowspan="1" colspan="1">Ações</th>
-                                    </tr> 
+                                
                                 </tfoot>
                         </table>
                     </div>

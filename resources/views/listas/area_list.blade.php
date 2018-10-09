@@ -3,7 +3,7 @@
 @section('title', 'Lista de Áreas')
 
 @section('content_header')
-<h2>Lista de Áreas</h2>
+<h2>Lista de Áreas/Departamentos</h2>
 <p>Lista que mostra as áreas existentens no sistema</p>
 @stop
 
@@ -73,12 +73,7 @@
                                      @endforeach
                                 </tbody>
                                 <tfoot>
-                                   <tr>
-                                     <th rowspan="1" colspan="1">ID</th>
-                                     <th rowspan="1" colspan="1">Sigle</th>
-                                     <th rowspan="1" colspan="1">Descrição</th>
-                                     <th rowspan="1" colspan="1">Ações</th>
-                                    </tr> 
+                                
                                 </tfoot>
                         </table>
                 </div>

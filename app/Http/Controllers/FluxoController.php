@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fluxo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Equipe;
 use App\FluxoAtividade;
@@ -48,9 +49,17 @@ class FluxoController extends Controller
         $dados = $request->all();
         // insere os dados na tabela
         $car = Fluxo::create($dados);
+
+        $acao = 1;
+        $id = $car->id;
+
+        $equipes = Equipe::orderBy('nome')->get();
+        $titulos = DB::table('fluxos')->where('id', '=', $id)->get();
+        //dd($titulo);
+
         if ($car) {
-            return redirect()->route('fluxos.index')
-                ->with('status', $request->descricao . ' Incluído!');
+            return view('formularios.fluxoadicionar_form', compact('acao', 'id', 'equipes', 'titulos'));
+                
         }
     }
 

@@ -3,7 +3,9 @@
 @section('title', 'Cadastro de Atividade')
 
 @section('content_header')
-<h2> Cadastro de Atividade </h2>
+@foreach ($titulos as $titulo) 
+<h2> {{$titulo->descricao}}: Cadastro de Atividade</h2>
+@endforeach
 @stop
 
 @section('content')
@@ -50,14 +52,14 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label for="atividade">Descrição da Atividade:</label>
+                        <label for="precedencia">Precedência:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-info"></i>
                             </div>    
-                            <input type="text" class="form-control" id="descricao" 
-                                name="atividade" placeholder="Digite a descrição da atividade"
-                                value="{{$reg->atividade or old('atividade')}}"                   
+                            <input type="number" class="form-control" id="precedencia" 
+                                name="precedencia" placeholder="Digite a precedencia"
+                                value="{{$reg->precedencia or old('precedencia')}}"                   
                                 required>
                         </div>
                     </div> 

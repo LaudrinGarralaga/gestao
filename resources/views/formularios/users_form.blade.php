@@ -33,7 +33,7 @@
                 {!! method_field('put') !!}
                 @endif
                 {{ csrf_field() }}
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="name">Nome do Usuário:</label>
                         <div class="input-group">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="email">Email do Usuário:</label>
                         <div class="input-group">
@@ -61,7 +61,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                         <div class="form-group">
                             <label for="password">Senha do Usuário:</label>
                             <div class="input-group">
@@ -74,6 +74,24 @@
                                     required>
                             </div>
                         </div> 
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nome">Equipe:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <select class="form-control" id="equipe_id" name="equipe_id">
+                                    @foreach ($equipes as $equipe)    
+                                    <option value="{{$equipe->id}}" 
+                                            @if ((isset($reg) && $reg->equipe_id==$equipe->id) 
+                                            or old('equipe_id') == $equipe->id) selected @endif>
+                                            {{$equipe->nome}}</option>
+                                    @endforeach    
+                                </select>
+                            </div>
+                        </div>
                     </div>
             </div>
         </div>   

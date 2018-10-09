@@ -39,9 +39,6 @@ Route::get('fluxoadicionar/{id}', 'FluxoController@adicionar')
 Route::post('fluxoadicionarsalvar/{id}', 'FluxoController@adicionarSalvar')
 ->name('fluxoatividade.adicionarSalvar');
 
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

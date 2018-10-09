@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FluxoAtividade extends Model
 {
-    protected $fillable = array('equipe_id', 'user_id', 'atividade');
+    protected $fillable = array('equipe_id', 'user_id', 'precedencia');
     protected $table = 'fluxoatividades';
     public $timestamps = false;
 

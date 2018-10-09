@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Equipe;
+use App\Membrosequipe;
 
 class UserController extends Controller {
 
@@ -30,7 +32,9 @@ class UserController extends Controller {
         // indica inclusão
         $acao = 1;
 
-        return view('formularios.users_form', compact('acao'));
+        $equipes = Equipe::orderBy('nome')->get();
+
+        return view('formularios.users_form', compact('acao', 'equipes'));
     }
 
     public function store(Request $request)
@@ -45,7 +49,15 @@ class UserController extends Controller {
         $user->password = bcrypt($request->password);
         $user->save();
 
-        if ($user) {
+        $id = $user->id;
+        //dd($id);
+
+        $membroequipe = new Membrosequipe;
+        $membroequipe->user_id = $id;
+        $membroequipe->equipe_id = $request->equipe_id;
+        $membroequipe->save();
+
+        if ($membroequipe) {
             return redirect()->route('users.index')
                             ->with('status', $request->name . ' Incluído!');
         }
@@ -73,7 +85,9 @@ class UserController extends Controller {
         // indica ao form que será alteração
         $acao = 2;
 
-        return view('formularios.users_form', compact('reg', 'acao'));
+        $equipes = Equipe::orderBy('nome')->get();
+
+        return view('formularios.users_form', compact('reg', 'acao', 'equipes'));
     }
   
     public function update(Request $request, $id)
