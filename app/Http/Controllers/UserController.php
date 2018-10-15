@@ -108,6 +108,11 @@ class UserController extends Controller {
         $user1 = $request->name;
         $user2 = $request->email;
         $user3 = bcrypt($request->password); 
+        $user4 = $request->equipe_id; 
+
+        $dados1 = DB::table('membrosequipes')
+            ->where('id', $id)
+            ->update(['user_id' => $id, 'equipe_id' => $user4]);
         $dados = DB::table('users')
             ->where('id', $id)
             ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);

@@ -21,8 +21,8 @@ class CreateMembrosequipesTable extends Migration {
 
 
         Schema::table('membrosequipes', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('equipe_id')->references('id')->on('equipes');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
         });
     }
 

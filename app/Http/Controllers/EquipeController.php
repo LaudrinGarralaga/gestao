@@ -128,10 +128,22 @@ class EquipeController extends Controller {
 
     public function detalhes($id) {
 
-        $equipemembros = Membrosequipe::where('equipe_id', '=', $id)->get();
+        $titulos = DB::table('equipes')
+                ->select('nome')
+                ->where('id', '=', $id)
+                ->get();
+                
+        //$equipemembros = Membrosequipe::where('equipe_id', '=', $id)->get();
+        $equipemembros = DB::table('membrosequipes')
+                ->join('equipes', 'membrosequipes.equipe_id', '=', 'equipes.id')
+                ->join('users', 'membrosequipes.user_id', '=', 'users.id')
+                ->select('users.name', 'equipes.nome', 'membrosequipes.id')
+                ->where('equipe_id', '=', $id)
+                ->get();
+        //dd($equipemembros);
         //$equipemembros = Membrosequipe::find(2);
 
-        return view('listas.equipedetalhes_list', compact('equipemembros'));
+        return view('listas.equipedetalhes_list', compact('equipemembros', 'titulos'));
     }
 
 }

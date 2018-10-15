@@ -34,6 +34,20 @@
                 {!! method_field('put') !!}
                 @endif
                 {{ csrf_field() }}
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="nome">Nome da Área:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-info"></i>
+                            </div>    
+                            <input type="text" class="form-control" id="nome" 
+                                name="nome" placeholder="Digite o nome da área"
+                                value="{{$reg->nome or old('nome')}}"                   
+                                required>
+                        </div>
+                    </div> 
+                </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="nome">Sigla da Área:</label>
@@ -47,20 +61,6 @@
                                 required>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <label for="nome">Descrição da Área:</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-info"></i>
-                            </div>    
-                            <input type="text" class="form-control" id="descricao" 
-                                name="descricao" placeholder="Digite a descrição da área"
-                                value="{{$reg->descricao or old('descricao')}}"                   
-                                required>
-                        </div>
-                    </div> 
                 </div>
             </div>
         </div>   

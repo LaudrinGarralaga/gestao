@@ -41,21 +41,18 @@
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Descrição</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Área</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Responsável</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Área/Departamento</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Responsável</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($equipes as $equipe) 
                                         <tr>
-                                            <td> {{$equipe->id}} </td>
-                                            <td> {{$equipe->descricao}} </td>
-                                            <td> {{$equipe->area->sigla}} </td>
-                                            <td> {{$equipe->user->name}} </td>
-                                            <td> <a href='{{route('equipesmembros.create', $equipe->id)}}'
+                                            <td style="width: 20%"> {{$equipe->nome}} </td>
+                                            <td style="width: 20%"> {{$equipe->area->sigla}} </td>
+                                            <td style="width: 25%; text-align: center"> <a href='{{route('equipesmembros.create', $equipe->id)}}'
                                                 class='btn btn-success' 
                                                 role='button'> <span class="glyphicon glyphicon-plus"></span> Adicionar 
                                              </a>
@@ -76,7 +73,8 @@
                                                  <button type="submit"
                                                          class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
                                              </form>                                
-                                         </td>                         
+                                            </td>     
+                                            <td style="width: 20%"> {{$equipe->user->name}} </td>                    
                                         </tr>
                                         
                                      @endforeach

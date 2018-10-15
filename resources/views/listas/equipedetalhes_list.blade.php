@@ -2,8 +2,18 @@
 
 @section('title', 'Equipe Detalhes')
 
-@section('content_header')
-<h2>Lista de Membros da Equipe:</h2>
+@section('content_header') 
+
+@if ($equipemembros != " ")
+@foreach ($titulos  as $titulo) 
+    <h2>Lista de Membros da Equipe: {{$titulo->nome}}</h2>
+    @endforeach
+@else
+@foreach ($equipemembros  as $equipemembro) 
+        <h2>Lista de Membros da Equipe: {{$equipemembro->nome}}</h2>
+    @endforeach
+@endif
+
 <p>Lista que mostra os membros da equipe</p>    
 @stop
 
@@ -51,8 +61,8 @@
                                     @foreach ($equipemembros  as $equipemembro) 
                                         <tr>
                                             <td> {{$equipemembro->id}} </td>
-                                            <td> {{$equipemembro->user->name}} </td>
-                                            <td> {{$equipemembro->equipe->nome}} </td>
+                                            <td> {{$equipemembro->name}} </td>
+                                            <td> {{$equipemembro->nome}} </td>
                                             <td>     
                                                 <form style="display: inline-block"
                                                    method="post"
@@ -86,7 +96,7 @@
         </div>
     </div>
 </div>
-<a href='{{route('equipes.create')}}' class='btn btn-primary' 
+<a href='{{route('equipesmembros.create')}}' class='btn btn-primary' 
            role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
 
 @stop

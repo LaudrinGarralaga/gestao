@@ -41,19 +41,17 @@
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Sigla</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Descrição</th>
-                                                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($areas as $area) 
                                         <tr>
-                                            <td> {{$area->id}} </td>
-                                            <td> {{$area->sigla}} </td>
-                                            <td> {{$area->descricao}} </td>
-                                            <td> 
+                                            <td style="width: 40%"> {{$area->nome}} </td>
+                                            <td style="width: 40%"> {{$area->sigla}} </td>
+                                            <td style="width: 20%; text-align: center"> 
                                                 <a href='{{route('areas.edit', $area->id)}}'
                                                     class='btn btn-warning' 
                                                     role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 

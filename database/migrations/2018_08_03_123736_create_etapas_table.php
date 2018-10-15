@@ -20,8 +20,8 @@ class CreateEtapasTable extends Migration {
         });
 
         Schema::table('etapas', function (Blueprint $table) {
-            $table->foreign('area_id')->references('id')->on('areas');
-            $table->foreign('fluxo_id')->references('id')->on('fluxos');
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->foreign('fluxo_id')->references('id')->on('fluxos')->onDelete('cascade');
         });
     }
 

@@ -3,7 +3,9 @@
 @section('title', 'Detalhes do Fluxo')
 
 @section('content_header')
-<h2>Detalhes do Fluxo</h2>
+@foreach ($fluxos as $fluxo) 
+<h2>Detalhes do Fluxo: {{$fluxo->descricao}}</h2>
+@endforeach
 @stop
 
 @section('content')
@@ -34,7 +36,7 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Equipe</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Responsável</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Atividade</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Precedência</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,7 +45,7 @@
                                             <td> {{$fluxoatividade->id}} </td>
                                             <td> {{$fluxoatividade->equipe->nome}} </td>
                                             <td> {{$fluxoatividade->equipe->user->name}} </td>
-                                            <td> {{$fluxoatividade->atividade}} </td>
+                                            <td> {{$fluxoatividade->precedencia}} </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

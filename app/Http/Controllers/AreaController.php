@@ -44,7 +44,7 @@ class AreaController extends Controller {
 
         $area = new Area;
         $area->sigla = $request->sigla;
-        $area->descricao = $request->descricao;
+        $area->nome = $request->nome;
         $area->user_id = \Illuminate\Support\Facades\Auth::id();
         $area->save();
 

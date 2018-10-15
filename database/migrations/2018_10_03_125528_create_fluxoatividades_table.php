@@ -21,8 +21,8 @@ class CreateFluxoatividadesTable extends Migration
         });
 
         Schema::table('fluxoatividades', function (Blueprint $table) {
-            $table->foreign('equipe_id')->references('id')->on('equipes');
-            $table->foreign('fluxo_id')->references('id')->on('fluxos');
+            $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
+            $table->foreign('fluxo_id')->references('id')->on('fluxos')->onDelete('cascade');
         });
     }
 

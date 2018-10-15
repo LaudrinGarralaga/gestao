@@ -18,7 +18,7 @@ class CreateHistoricosTable extends Migration {
         });
 
         Schema::table('historicos', function (Blueprint $table) {
-            $table->foreign('etapa_id')->references('id')->on('etapas');
+            $table->foreign('etapa_id')->references('id')->on('etapas')->onDelete('cascade');
         });
     }
 

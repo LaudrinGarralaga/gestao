@@ -40,7 +40,6 @@
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data de Cadastro</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário de Cadastro</th>
@@ -50,11 +49,10 @@
                                 <tbody>
                                     @foreach ($users as $user) 
                                     <tr>
-                                        <td> {{$user->id}} </td>
-                                        <td> {{$user->name}} </td>
-                                        <td> {{Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}} </td>
-                                        <td> {{Carbon\Carbon::parse($user->created_at)->format('h:m:s')}} </td>
-                                        <td><a href='{{route('users.edit', $user->id)}}'
+                                        <td style="width: 25%"> {{$user->name}} </td>
+                                        <td style="width: 25%"> {{Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}} </td>
+                                        <td style="width: 25%"> {{Carbon\Carbon::parse($user->created_at)->format('h:m:s')}} </td>
+                                        <td style="width: 15%; text-align: center"><a href='{{route('users.edit', $user->id)}}'
                                                 class='btn btn-warning' 
                                                 role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
                                             </a>
