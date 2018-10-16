@@ -21,7 +21,8 @@
             </ul>
         </div>
         @endif  
-    </div>  
+</div>  
+<div class="col-sm-4">
     @if ($acao == 1)
         <div class="box box-primary">
             <div class="box-body">
@@ -33,7 +34,7 @@
                 {!! method_field('put') !!}
                 @endif
                 {{ csrf_field() }}
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="name">Nome do Usuário:</label>
                         <div class="input-group">
@@ -47,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="email">Email do Usuário:</label>
                         <div class="input-group">
@@ -61,7 +62,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                         <div class="form-group">
                             <label for="password">Senha do Usuário:</label>
                             <div class="input-group">
@@ -75,7 +76,7 @@
                             </div>
                         </div> 
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             <label for="nome">Equipe:</label>
                             <div class="input-group">
@@ -94,8 +95,11 @@
                         </div>
                     </div>
             </div>
+            <div class="col-sm-6"></div>
         </div>   
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button> 
     </form>    
 </form>
+            </div>
+
 @stop
