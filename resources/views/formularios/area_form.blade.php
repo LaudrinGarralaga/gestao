@@ -4,9 +4,17 @@
 
 @section('content_header')
 @if ($acao == 1)
-    <h2> Cadastro de Áreas </h2>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Cadastro de Áreas/Departamentos</p> 
+        </div>
+    </div>
 @else 
-    <h2> Alteração de Áreas </h2>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Alteração de Áreas/Departamentos</p> 
+        </div>
+    </div>
 @endif
 @stop
 
@@ -24,11 +32,11 @@
 </div>  
 
         @if ($acao == 1)
-        <div class="box box-primary">
+        <div class="box box-success">
             <div class="box-body">
         <form method="post" action="{{route('areas.store')}}">
             @else 
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-body">
             <form method="post" action="{{route('areas.update', $reg->id)}}">
                 {!! method_field('put') !!}

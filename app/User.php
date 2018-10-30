@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Equipe;
 use App\Permission;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 
     use Notifiable;
 
@@ -28,15 +30,18 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(\App\Role::class);
     }
 
-    public function hasPermission(Permission $permission) {
+    public function hasPermission(Permission $permission)
+    {
         return $this->hasAnyRoles($permission->roles);
     }
 
-    public function hasAnyRoles($roles) {
+    public function hasAnyRoles($roles)
+    {
         if (is_array($roles) || is_object($roles)) {
             return !!$roles->intersect($this->roles)->count();
         }
@@ -44,9 +49,19 @@ class User extends Authenticatable {
         return $this->roles->contains('name', $roles);
     }
 
-    public function equipe() {
+    public function equipe()
+    {
         return $this->belongsTo('App\Equipe');
     }
 
+    public function membrosequipe()
+    {
+        return $this->belongsTo('App\Membrosequipe');
+    }
+
+    public function notificacao()
+    {
+        return $this->belongsToMany('App\Notificacao');
+    }
 
 }

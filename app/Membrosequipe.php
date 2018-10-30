@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Membrosequipe extends Model
 {
-    protected $fillable = array('responsavel', 'user_id', 'equipe_id');
+    protected $fillable = array('user_id', 'equipe_id', 'visto');
     public $timestamps = false;
 
-    public function equipe() {
+    public function equipe()
+    {
         return $this->belongsTo('App\Equipe');
     }
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 }

@@ -4,25 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FluxoAtividade extends Model
+class Notificacao extends Model
 {
-    protected $fillable = array('equipe_id', 'fluxo_id', 'precedencia', 'finalizado');
-    protected $table = 'fluxoatividades';
+    protected $fillable = array('user_id','atividade_id', 'visto');
+    protected $table = 'notificacoes';
     public $timestamps = false;
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
-
-    public function equipe()
-    {
-        return $this->belongsTo('App\Equipe');
-    }
-
     public function fluxo()
     {
         return $this->belongsTo('App\Fluxo');
     }
-
+    public function equipe()
+    {
+        return $this->belongsTo('App\Equipe');
+    }
 }

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Áreas/Departamentos')
+@section('title', 'Notificações')
 
 @section('content_header')
 <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
     <div class="bred">
-        <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Áreas/Departamentos</p> 
+        <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Notificações</p> 
     </div>
 </div>
 @stop
@@ -42,25 +42,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($areas as $area) 
+                            @foreach ($notificacoes as $notificacao) 
                                 <tr>
-                                    <td style="width: 40%"> {{$area->nome}} </td>
-                                    <td style="width: 40%"> {{$area->sigla}} </td>
-                                    <td style="width: 20%; text-align: center"> 
-                                        <a href='{{route('areas.edit', $area->id)}}'
-                                            class='btn btn-warning' 
-                                            role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
-                                        </a>
-                                        <form style="display: inline-block"
-                                            method="post"
-                                            action="{{route('areas.destroy', $area->id)}}"
-                                            onsubmit="return confirm('Confirma Exclusão?')">
-                                            {{ method_field('delete') }}
-                                            {{ csrf_field() }}
-                                            <button type="submit"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
-                                        </form>                                
+                                    <td style="width: 40%"> {{$notificacao->user->name}} </td>
+                                    <td style="width: 40%"> {{$notificacao->fluxo}} </td>
+                                    <td style="width: 20%; text-align: center">                                         
+                                        <a href='{{route('notificacao.finalizar', $notificacao->id)}}'
+                                        class='btn btn-success' 
+                                        role='button'><i class="fa fa-close"></i> Finalizar 
+                                        </a>                                                                  
                                     </td>                         
-                                </tr>          
+                                </tr>         
                             @endforeach
                         </tbody>
                         <tfoot></tfoot>

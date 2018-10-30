@@ -4,9 +4,17 @@
 
 @section('content_header')
 @if ($acao == 1)
-    <h2> Inclusão de Membros na Equipe </h2>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Inclusão de Membros na Equipe</p> 
+        </div>
+    </div>
 @else 
-    <h2> Alteração de Membros da Equipe </h2>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Alteração de Membros da Equipe</p> 
+        </div>
+    </div>
 @endif
 @stop
 
@@ -25,7 +33,7 @@
 
 
     @if ($acao == 1)
-    <div class="box box-primary">
+    <div class="box box-success">
         <div class="box-body">
     <form method="post" action="{{route('equipesmembros.store')}}">
         @else 

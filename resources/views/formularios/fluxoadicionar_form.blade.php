@@ -4,7 +4,11 @@
 
 @section('content_header')
 @foreach ($titulos as $titulo) 
-<h2> {{$titulo->descricao}}: Cadastro de Atividade</h2>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Cadastro de Atividade do fluxo > {{$titulo->descricao}}</p> 
+        </div>
+    </div>
 @endforeach
 @stop
 
@@ -22,11 +26,11 @@
 </div>
 
     @if ($acao == 1)
-    <div class="box box-primary">
+    <div class="box box-success">
             <div class="box-body">
     <form method="post" action="{{route('fluxoatividade.adicionarSalvar', $id)}}">
         @else 
-        <div class="box box-primary">
+        <div class="box box-success">
                 <div class="box-body">
         <form method="post" action="{{route('fluxos.update', $reg->id)}}">
             {!! method_field('put') !!}

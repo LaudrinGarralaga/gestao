@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Auth;
 use App\Area;
-use App\User;
-use App\Membrosequipe;
 use App\Equipe;
+use App\Membrosequipe;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class MembrosequipeController extends Controller {
+class MembrosequipeController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
 
         if (!Auth::check()) {
             return redirect('/');
         }
-        
-        //$areas = Area::where('user_id', auth()->user()->id)->get();
+
         $equipemembros = Membrosequipe::paginate(10);
 
         return view('listas.equipedetalhes_list', compact('equipemembros'));
     }
 
-    public function create() {
+    public function create()
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -40,7 +41,8 @@ class MembrosequipeController extends Controller {
         return view('formularios.equipemembros_form', compact('acao', 'users', 'equipes'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -53,21 +55,23 @@ class MembrosequipeController extends Controller {
 
         if ($car) {
             return redirect()->route('equipes.index')
-                            ->with('status', $request->sigla . ' Incluído!');
+                ->with('status', $request->sigla . ' Incluído!');
         }
     }
 
-    public function show($id) {
-        
+    public function show($id)
+    {
+
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
         }
 
-        // obtém os dados do registro a ser editado 
+        // obtém os dados do registro a ser editado
         $reg = Area::find($id);
 
         // indica ao form que será alteração
@@ -79,7 +83,8 @@ class MembrosequipeController extends Controller {
         return view('formularios.area_form', compact('reg', 'acao', 'users', 'equipes'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -91,16 +96,16 @@ class MembrosequipeController extends Controller {
         $alt = $reg->update($dados);
         if ($alt) {
             return redirect()->route('areas.index')
-                            ->with('status', $request->sigla . ' Alterado!');
+                ->with('status', $request->sigla . ' Alterado!');
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
         }
-        dd($id);
 
         $membroequipes = Membrosequipe::find($id);
         if ($membroequipes->delete()) {

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Gestão de Fluxo',
+    'title' => 'Sequência',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Gestão</b>FLUXO',
+    'logo' => '<b>Sequência</b>',
 
-    'logo_mini' => '<b>G</b>FLX',
+    'logo_mini' => '<b>S</b>Q',
 
     /*
     |--------------------------------------------------------------------------
@@ -127,7 +127,7 @@ return [
             'icon' => 'flag',
         ],
         [
-            'text' => 'Fluxos',
+            'text' => 'Sequência',
             'url'  => 'fluxos',
             'icon' => 'list',
         ],

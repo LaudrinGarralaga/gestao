@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Equipe;
+use App\Membrosequipe;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\User;
-use App\Equipe;
-use App\Membrosequipe;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
-    
     public function index()
     {
         if (!Auth::check()) {
@@ -50,7 +50,6 @@ class UserController extends Controller {
         $user->save();
 
         $id = $user->id;
-        //dd($id);
 
         $membroequipe = new Membrosequipe;
         $membroequipe->user_id = $id;
@@ -59,10 +58,10 @@ class UserController extends Controller {
 
         if ($membroequipe) {
             return redirect()->route('users.index')
-                            ->with('status', $request->name . ' Incluído!');
+                ->with('status', $request->name . ' Incluído!');
         }
     }
-   
+
     public function show($id)
     {
         //
@@ -74,12 +73,12 @@ class UserController extends Controller {
             return redirect('/');
         }
 
-        // obtém os dados do registro a ser editado 
+        // obtém os dados do registro a ser editado
         $reg = User::find($id);
 
         /* if (Gate::denies('Atu_Area', $reg)) {
-          abort(403, 'Não autorizado');
-          }
+        abort(403, 'Não autorizado');
+        }
          */
 
         // indica ao form que será alteração
@@ -89,7 +88,7 @@ class UserController extends Controller {
 
         return view('formularios.users_form', compact('reg', 'acao', 'equipes'));
     }
-  
+
     public function update(Request $request, $id)
     {
         if (!Auth::check()) {
@@ -97,31 +96,53 @@ class UserController extends Controller {
         }
 
         $reg = User::find($id);
-        //dd($reg);
 
         /*
-          if (Gate::denies('Atu_Area', $reg)) {
-          abort(403, 'Não autorizado');
-          }
+        if (Gate::denies('Atu_Area', $reg)) {
+        abort(403, 'Não autorizado');
+        }
          */
 
         $user1 = $request->name;
         $user2 = $request->email;
-        $user3 = bcrypt($request->password); 
-        $user4 = $request->equipe_id; 
+        $user3 = bcrypt($request->password);
+        $user4 = $request->equipe_id;
 
-        $dados1 = DB::table('membrosequipes')
-            ->where('id', $id)
-            ->update(['user_id' => $id, 'equipe_id' => $user4]);
-        $dados = DB::table('users')
-            ->where('id', $id)
-            ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
+        $teste = DB::table('membrosequipes')
+            ->where('user_id', $id)
+            ->count();
+
+        if ($teste = 0) {
+            $user = new Membrosequipe;
+            $user1->user_id = $id;
+            $user2->equipe_id = $equipe_id;
+            $user->save();
+            dd($user1);
+
+            $dados = DB::table('users')
+                ->where('id', $id)
+                ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
 
             if ($dados) {
                 return redirect()->route('users.index')
-                                ->with('status', $request->name . ' Alterado!');
+                    ->with('status', $request->name . ' Alterado!');
             }
-        
+        } else {
+
+            $dados1 = DB::table('membrosequipes')
+                ->where('id', $id)
+                ->update(['user_id' => $id, 'equipe_id' => $user4]);
+
+            $dados = DB::table('users')
+                ->where('id', $id)
+                ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
+
+            if ($dados) {
+                return redirect()->route('users.index')
+                    ->with('status', $request->name . ' Alterado!');
+            }
+        }
+
     }
 
     public function destroy($id)
@@ -129,7 +150,7 @@ class UserController extends Controller {
         $user = User::find($id);
         if ($user->delete()) {
             return redirect()->route('users.index')
-                            ->with('status', $user->name . ' Excluído!');
+                ->with('status', $user->name . ' Excluído!');
         }
     }
 

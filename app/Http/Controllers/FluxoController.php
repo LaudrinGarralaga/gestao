@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Fluxo;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use App\Equipe;
+use App\Fluxo;
 use App\FluxoAtividade;
+use App\Notificacao;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FluxoController extends Controller
 {
@@ -19,7 +20,6 @@ class FluxoController extends Controller
             return redirect('/');
         }
 
-        //$areas = Area::where('user_id', auth()->user()->id)->get();
         $fluxos = Fluxo::paginate(10);
 
         return view('listas.fluxo_list', compact('fluxos'));
@@ -35,7 +35,9 @@ class FluxoController extends Controller
         // indica inclusão
         $acao = 1;
 
-        return view('formularios.fluxo_form', compact('acao'));
+        $equipes = Equipe::orderBy('nome')->get();
+
+        return view('formularios.fluxo_form', compact('acao', 'equipes'));
     }
 
     public function store(Request $request)
@@ -46,21 +48,40 @@ class FluxoController extends Controller
         }
 
         // recupera todos os campos do formulário
-        $dados = $request->all();
-        // insere os dados na tabela
-        $car = Fluxo::create($dados);
+        $equipe = $request->equipe;
+        $precedencia = $request->precedencia;
 
-        $acao = 1;
-        $id = $car->id;
+        $fluxo = new Fluxo;
+        $fluxo->descricao = $request->descricao;
+        $fluxo->save();
 
-        $equipes = Equipe::orderBy('nome')->get();
-        $titulos = DB::table('fluxos')->where('id', '=', $id)->get();
-        //dd($titulo);
+        $id = DB::getPdo()->lastInsertId();
 
-        if ($car) {
-            return view('formularios.fluxoadicionar_form', compact('acao', 'id', 'equipes', 'titulos'));
-                
+        for ($i = 0; $i < count($request->equipe); $i++) {
+            FluxoAtividade::create([
+                'fluxo_id' => $id,
+                'equipe_id' => $request->equipe[$i],
+                'precedencia' => $request->precedencia[$i],
+            ]);
         }
+
+        $teste = FluxoAtividade::join('equipes', 'equipe_id', '=', 'equipes.id')
+            ->select('fluxoatividades.id','fluxoatividades.equipe_id', 'equipes.user_id')
+            ->where([
+                ['precedencia', '=', 1],
+                ['fluxo_id', '=', $id]
+            ])->get();
+        
+        for ($i = 0; $i < count($teste); $i++) { 
+            Notificacao::create([
+                'user_id' => $teste[$i]->user_id,
+                'atividade_id' => $teste[$i]->id,
+            ]);
+        }
+
+        return redirect()->route('fluxos.index')
+            ->with('status', $request->descricao . ' Cadastrado!');
+
     }
 
     public function show($id)
@@ -130,84 +151,17 @@ class FluxoController extends Controller
         }
     }
 
-    public function pesq()
+    public function detalhes($id)
     {
-
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $carros = Carro::paginate(3);
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function filtro(Request $request)
-    {
-
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        // obtém dados do form de pesquisa
-        $modelo = $request->modelo;
-        $precomax = $request->precomax;
-        $cond = array();
-        if (!empty($modelo)) {
-            array_push($cond, array('modelo', 'like', '%' . $modelo . '%'));
-        }
-        if (!empty($precomax)) {
-            array_push($cond, array('preco', '<=', $precomax));
-        }
-        $carros = Carro::where($cond)
-            ->orderBy('modelo')->paginate(3);
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function filtro2(Request $request)
-    {
-
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        // obtém dados do form de pesquisa
-        $modelo = $request->modelo;
-        $precomax = $request->precomax;
-        if (empty($precomax)) {
-            $carros = Carro::where('modelo', 'like', '%' . $modelo . '%')
-                ->orderBy('modelo')->paginate(3);
-        } else {
-            $carros = Carro::where('modelo', 'like', '%' . $modelo . '%')
-                ->where('preco', '<=', $precomax)
-                ->orderBy('modelo')->paginate(3);
-        }
-        return view('carros_pesq', compact('carros'));
-    }
-
-    public function graf()
-    {
-
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $carros = DB::table('carros')
-            ->join('marcas', 'carros.marca_id', '=', 'marcas.id')
-            ->select('marcas.nome as marca', DB::raw('count(*) as num'))
-            ->groupBy('marcas.nome')
-            ->get();
-        return view('carros_graf', compact('carros'));
-    }
-
-    public function detalhes($id){
 
         $fluxoatividades = Fluxoatividade::where('fluxo_id', '=', $id)->get();
         $fluxos = Fluxo::where('id', '=', $id)->get();
-    
+
         return view('listas.fluxodetalhes_list', compact('fluxoatividades', 'fluxos'));
     }
 
-    public function adicionar($id){
+    public function adicionar($id)
+    {
 
         $equipes = Equipe::orderBy('nome')->get();
         $titulos = DB::table('fluxos')->where('id', '=', $id)->get();
@@ -216,8 +170,9 @@ class FluxoController extends Controller
         return view('formularios.fluxoadicionar_form', compact('acao', 'equipes', 'id', 'titulos'));
     }
 
-    public function adicionarSalvar(Request $request, $id){
-        
+    public function adicionarSalvar(Request $request, $id)
+    {
+
         $fluxoadd = new FluxoAtividade;
         $fluxoadd->equipe_id = $request->equipe_id;
         $fluxoadd->fluxo_id = $id;
@@ -226,8 +181,18 @@ class FluxoController extends Controller
 
         if ($fluxoadd) {
             return redirect()->route('fluxos.index')
-                            ->with('status', $request->atividade . ' Incluído!');
+                ->with('status', $request->atividade . ' Incluído!');
         }
     }
+
+    /*public function finalizar(Request $request, $id){
+
+        Fluxoatividade::where('id', '=', $id)
+          ->update(['finalizado' => 1]);
+
+          $fluxos = $id; 
+          //dd($fluxos);
+          return redirect()->route('fluxos.index');
+    }*/
 
 }
