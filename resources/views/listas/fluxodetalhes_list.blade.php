@@ -51,6 +51,12 @@
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
                                         @endif
                                     </td>
+                                    <td> 
+                                        <a href='{{route('fluxos.finalizar', $fluxoatividade->id)}}'
+                                            class='btn btn-success' 
+                                            role='button'> <span class="glyphicon glyphicon-ok"></span> Finalizar 
+                                        </a> 
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

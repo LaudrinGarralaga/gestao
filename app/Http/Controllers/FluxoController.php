@@ -185,7 +185,7 @@ class FluxoController extends Controller
         }
     }
 
-    /*public function finalizar(Request $request, $id){
+    public function finalizar(Request $request, $id){
 
         Fluxoatividade::where('id', '=', $id)
           ->update(['finalizado' => 1]);
@@ -193,6 +193,6 @@ class FluxoController extends Controller
           $fluxos = $id; 
           //dd($fluxos);
           return redirect()->route('fluxos.index');
-    }*/
+    }
 
 }

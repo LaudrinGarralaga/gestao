@@ -37,6 +37,8 @@ Route::get('fluxodetalhes/{id}', 'FluxoController@detalhes')
     ->name('fluxos.detalhes');
 Route::get('fluxoadicionar/{id}', 'FluxoController@adicionar')
     ->name('fluxos.adicionar');
+Route::get('fluxofinalizar/{id}', 'FluxoController@finalizar')
+    ->name('fluxos.finalizar');
 Route::post('fluxoadicionarsalvar/{id}', 'FluxoController@adicionarSalvar')
     ->name('fluxoatividade.adicionarSalvar');
 Route::get('finalizar/{id}', 'NotificacaoController@finalizar')

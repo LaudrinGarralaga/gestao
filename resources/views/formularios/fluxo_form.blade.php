@@ -44,45 +44,46 @@
                     {!! method_field('put') !!}
                     @endif
                     {{ csrf_field() }}
-                    <div class="col-sm-12">
-                            <div class="form-group">
-                                    <label for="descricao">Descrição da Sequência:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-info"></i>
-                                        </div>    
-                                        <input type="text" class="form-control" id="descricao" 
-                                            name="descricao" placeholder="Digite o descrição da sequência"
-                                            value="{{$reg->descricao or old('descricao')}}"                   
-                                            required>
-                                    </div>
-                                </div> 
+                    <div class="col-sm-6">
                         <div class="form-group">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dynamic_field">
-                                            <thead>
-                                                    <tr role="row">
-                                                        <th >Equipe:</th>
-                                                        <th >Precedência</th>
-                                                        <th >Adicionar Campo</th>
-                                                    </tr>
-                                                </thead>
-                                        <tr>
-                                            <td style="width: 45%"><select class="form-control" id="equipe_id" name="equipe[]" >
-                                                <option value="2">Desenvolvimento Front-End</option>
-                                                <option value="1">Desenvolvimento Back-End</option>
-                                                <option value="3">Tester</option>   
-                                            </select></td>
-                                            <td style="width: 45%"><input type="number" name="precedencia[]" placeholder="Precedência" class="form-control name_list" /></td>
-                                            <td style="width: 10%"><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
-                                        </tr>
-                                    </table>
-                                </div>
+                            <label for="descricao">Descrição da Sequência:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-info"></i>
+                                </div>    
+                                <input type="text" class="form-control" id="descricao" 
+                                    name="descricao" placeholder="Digite o descrição da sequência"
+                                    value="{{$reg->descricao or old('descricao')}}"                   
+                                    required>
+                            </div>
                         </div>
-                    </div>
+                    </div>     
+                    <div class="col-sm-6">      
+                        <div class="form-group">
+                            <div class="contacts">
+                                <label>Selecione a equipe e digite a precedência:</label>
+                                <div class="form-group multiple-form-group input-group">
+                                    <div class="input-group-btn input-group-select">
+                                        <select class="form-control" id="equipe_id" name="equipe[]">
+                                            @foreach ($equipes as $equipe)    
+                                            <option value="{{$equipe->id}}" 
+                                            @if ((isset($reg) && $reg->equipe_id==$equipe->id) 
+                                            or old('equipe_id') == $equipe->id) selected @endif>
+                                            {{$equipe->nome}}</option>
+                                            @endforeach    
+                                        </select>    
+                                    </div>
+                                    <input type="number" name="precedencia[]" class="form-control" placeholder="Qual a precedência?">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success btn-add">+</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
                 </div>
-            </div>  
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
+            </div>     
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>       
         </form>
     </form>
 @stop
