@@ -36,7 +36,7 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="col-sm-4">
+            <div class="col-sm-10">
                     <div class="form-group">
                         <label for="nome">Equipe:</label>
                         <div class="input-group">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label for="precedencia">Precedência:</label>
                         <div class="input-group">
@@ -62,15 +62,15 @@
                                 <i class="fa fa-info"></i>
                             </div>    
                             <input type="number" class="form-control" id="precedencia" 
-                                name="precedencia" placeholder="Digite a precedencia"
+                                name="precedencia" placeholder="Digite a precedência"
                                 value="{{$reg->precedencia or old('precedencia')}}"                   
-                                required>
+                                required min="1" max="99">
                         </div>
                     </div> 
                 </div>
         </div>     
         </div>
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button>
         </form>    
     </form>
 

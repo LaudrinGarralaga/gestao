@@ -31,7 +31,7 @@
                 <td> {{$etapa->fluxo->descricao}} </td>
                 <td> <a href='{{route('etapas.edit', $etapa->id)}}'
                         class='btn btn-info' 
-                        role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
+                        role='button'> <span class="glyphicon glyphicon-pencil"></span>  
                     </a>
                     <form style="display: inline-block"
                           method="post"
@@ -40,7 +40,7 @@
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                         <button type="submit"
-                                class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
+                                class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  </button>
                     </form>                                
                 </td>
             </tr>

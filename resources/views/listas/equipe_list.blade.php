@@ -47,17 +47,17 @@
                                 <tr>
                                     <td style="width: 20%"> {{$equipe->nome}} </td>
                                     <td style="width: 20%"> {{$equipe->area->sigla}} </td>
-                                    <td style="width: 25%; text-align: center"> <a href='{{route('equipesmembros.create', $equipe->id)}}'
+                                    <td style="width: 25%; text-align: center"> <a href='{{route('equipemembros.adicionar', $equipe->id)}}'
                                         class='btn btn-success' 
-                                        role='button'> <span class="glyphicon glyphicon-plus"></span> Adicionar 
+                                        role='button'> <span class="glyphicon glyphicon-plus"></span>  
                                         </a>
                                         <a href='{{route('equipes.detalhes', $equipe->id)}}'
                                             class='btn btn-primary' 
-                                            role='button'> <span class="glyphicon glyphicon-list"></span> Detalhes 
+                                            role='button'> <span class="glyphicon glyphicon-list"></span>  
                                         </a>
                                         <a href='{{route('equipes.edit', $equipe->id)}}'
                                             class='btn btn-warning' 
-                                            role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
+                                            role='button'> <span class="glyphicon glyphicon-pencil"></span>  
                                         </a>
                                         <form style="display: inline-block"
                                             method="post"
@@ -65,10 +65,16 @@
                                             onsubmit="return confirm('Confirma Exclusão?')">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button>
                                         </form>                                
                                     </td>     
-                                    <td style="width: 20%"> {{$equipe->user->name}} </td>                    
+                                    <td style="width: 20%"> 
+                                        @if( is_null($equipe->user))
+                                                                                                                            
+                                        @else
+                                        {{$equipe->user->name}} 
+                                        @endif               
+                                    </td>                    
                                 </tr>   
                             @endforeach
                         </tbody>
@@ -85,7 +91,7 @@
         </div>
     </div>
 </div>
-<a href='{{route('equipes.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
+<a href='{{route('equipes.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-plus"></span> Novo </a>
 
 @stop
 @section('js')

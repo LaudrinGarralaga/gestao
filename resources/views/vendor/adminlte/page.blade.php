@@ -55,9 +55,19 @@
             @endif
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
-
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li class="dropdown notifications-menu">
+                                <a href='{{route('notificacoes.index')}}' class='btn' role='button'>
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">{{ App\Notificacao::where('user_id', '=', Auth::user()->id)->where('visto', '<>', '1')->count() }}</span>
+                            </a>            
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                            </a>            
+                        </li>
+                        <li> 
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
                                     <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}

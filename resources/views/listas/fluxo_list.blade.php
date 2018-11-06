@@ -48,11 +48,11 @@
                                     <td style="width: 30%;text-align: center">
                                         <a href='{{route('fluxos.adicionar', $fluxo->id)}}'
                                             class='btn btn-success' 
-                                            role='button'> <span class="glyphicon glyphicon-plus"></span> Adicionar 
+                                            role='button'> <span class="glyphicon glyphicon-plus"></span>  
                                         </a>
                                         <a href='{{route('fluxos.detalhes', $fluxo->id)}}'
                                             class='btn btn-primary' 
-                                             role='button'> <span class="glyphicon glyphicon-list"></span> Detalhes 
+                                             role='button'> <span class="glyphicon glyphicon-list"></span>  
                                         </a> 
                                         <form style="display: inline-block"
                                             method="post"
@@ -60,7 +60,7 @@
                                             onsubmit="return confirm('Confirma Exclusão?')">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir </button>
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>  </button>
                                         </form>                                      
                                     </td>                                    
                                 </tr>
@@ -82,7 +82,7 @@
     </div>
 </div>
 <a href='{{route('fluxos.create')}}' class='btn btn-primary' 
-           role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
+           role='button'><span class="glyphicon glyphicon-plus"></span> Novo </a>
 @stop
 
 @section('js')

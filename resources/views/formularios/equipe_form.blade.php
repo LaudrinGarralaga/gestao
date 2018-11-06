@@ -60,7 +60,7 @@
                 </div>
             </div>
             
-            <div class="col-sm-8">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="nome">Descrição da Equipe:</label>
                     <div class="input-group">
@@ -75,7 +75,7 @@
                 </div>
             </div>
             
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="nome">Área:</label>
                     <div class="input-group">
@@ -93,27 +93,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nome">Responsável pela Equipe:</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </div>          
-                            <select class="form-control" id="user_id" name="user_id" >
-                                @foreach ($responsaveis as $responsavel)    
-                                <option value="{{$responsavel->id}}" 
-                                        @if ((isset($reg) && $reg->user_id==$responsavel->id) 
-                                        or old('responsavel') == $responsavel->id) selected @endif>
-                                        {{$responsavel->name}}</option>
-                                @endforeach    
-                            </select>
-                        </div>
-                    </div>
-                </div>
         </div>
         </div>
-        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button>
     </form>    
 </form>
 

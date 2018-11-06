@@ -48,26 +48,31 @@
                     <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Membro</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Equipe</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tornar membro responsável pela equipe</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($equipemembros  as $equipemembro) 
                                 <tr>
-                                    <td> {{$equipemembro->id}} </td>
-                                    <td> {{$equipemembro->name}} </td>
-                                    <td> {{$equipemembro->nome}} </td>
-                                    <td>     
+                                    <td style="width: 30%"> {{$equipemembro->name}} </td>
+                                    <td style="width: 30%"> {{$equipemembro->nome}} </td>
+                                    <td style="width: 20%">
+                                        <a href='{{route('equipe.responsavel', $equipemembro->id)}}'
+                                            class='btn btn-success' 
+                                            role='button'> <span class="glyphicon glyphicon-ok"></span>  
+                                        </a> 
+                                    </td>
+                                    <td style="width: 10%">     
                                         <form style="display: inline-block"
                                             method="post"
                                             action="{{route('equipesmembros.destroy', $equipemembro->id)}}"
                                             onsubmit="return confirm('Confirma Exclusão?')">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
+                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  </button>
                                         </form>    
                                     </td>                         
                                 </tr>   
@@ -86,7 +91,6 @@
         </div>
     </div>
 </div>
-<a href='{{route('equipesmembros.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
 
 @stop
 

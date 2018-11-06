@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class MembrosequipeController extends Controller
 {
@@ -20,17 +21,22 @@ class MembrosequipeController extends Controller
             return redirect('/');
         }
 
-        $equipemembros = Membrosequipe::paginate(10);
-
+        $equipemembros = Membrosequipe::All();
+       
         return view('listas.equipedetalhes_list', compact('equipemembros'));
     }
 
-    public function create()
+    public function create($id)
     {
 
         if (!Auth::check()) {
             return redirect('/');
         }
+
+        $titulos = DB::table('equipes')
+            ->select('nome')
+            ->where('id', '=', $id)
+            ->get();
 
         // indica inclusão
         $acao = 1;
@@ -38,7 +44,7 @@ class MembrosequipeController extends Controller
         $users = User::orderBy('name')->get();
         $equipes = Equipe::orderBy('nome')->get();
 
-        return view('formularios.equipemembros_form', compact('acao', 'users', 'equipes'));
+        return view('formularios.equipemembros_form', compact('acao', 'users', 'equipes', 'titulos'));
     }
 
     public function store(Request $request)
@@ -47,13 +53,13 @@ class MembrosequipeController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
+        
+        $fluxoadd = new Membrosequipe;
+        $fluxoadd->equipe_id = $request->equipe_id;
+        $fluxoadd->user_id =  $request->user_id;
+        $fluxoadd->save();
 
-        // recupera todos os campos do formulário
-        $dados = $request->all();
-        // insere os dados na tabela
-        $car = Membrosequipe::create($dados);
-
-        if ($car) {
+        if ($fluxoadd) {
             return redirect()->route('equipes.index')
                 ->with('status', $request->sigla . ' Incluído!');
         }
@@ -113,4 +119,25 @@ class MembrosequipeController extends Controller
         }
     }
 
+    public function adicionar($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
+        $titulos = DB::table('equipes')
+            ->select('nome')
+            ->where('id', '=', $id)
+            ->get();
+    
+        // indica inclusão
+        $acao = 1;
+
+        $registro = Equipe::find($id);
+
+        $users = User::orderBy('name')->get();
+       
+        return view('formularios.equipemembros_form', compact('acao', 'titulos', 'users', 'registro'));
+    }
+    
 }

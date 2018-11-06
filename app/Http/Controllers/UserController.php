@@ -7,6 +7,7 @@ use App\Membrosequipe;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserStoreUpdateFormRequest;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -37,7 +38,7 @@ class UserController extends Controller
         return view('formularios.users_form', compact('acao', 'equipes'));
     }
 
-    public function store(Request $request)
+    public function store(UserStoreUpdateFormRequest $request)
     {
         if (!Auth::check()) {
             return redirect('/');
@@ -89,7 +90,7 @@ class UserController extends Controller
         return view('formularios.users_form', compact('reg', 'acao', 'equipes'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserStoreUpdateFormRequest $request, $id)
     {
         if (!Auth::check()) {
             return redirect('/');

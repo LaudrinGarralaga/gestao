@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>   
-        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button> 
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button> 
     </form>    
 </form>
 

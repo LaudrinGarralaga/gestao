@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notificacao;
+use Illuminate\Support\Facades\DB;
 
 class NotificacaoController extends Controller
 {
@@ -21,6 +22,9 @@ class NotificacaoController extends Controller
             ['visto', '<>', '1']
             ])->GET();
         
+        /*$dados = DB::table('notificacoes')
+            ->where('user_id', '=', $id)
+            ->update(['visto' => 1]);*/
         //dd($notificacoes);
 
         return view('listas.notificacoes_list', compact('notificacoes'));

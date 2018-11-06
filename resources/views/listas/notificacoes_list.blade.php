@@ -49,7 +49,7 @@
                                     <td style="width: 20%; text-align: center">                                         
                                         <a href='{{route('notificacao.finalizar', $notificacao->id)}}'
                                         class='btn btn-success' 
-                                        role='button'><i class="fa fa-close"></i> Finalizar 
+                                        role='button'><i class="fa fa-close"></i>  
                                         </a>                                                                  
                                     </td>                         
                                 </tr>         
@@ -70,7 +70,6 @@
         </div>
     </div>
 </div>
-<a href='{{route('areas.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
 @stop
 
 @section('js')

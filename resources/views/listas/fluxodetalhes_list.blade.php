@@ -30,7 +30,6 @@
                     <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Equipe</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Responsável</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Precedência</th>
@@ -41,7 +40,6 @@
                         <tbody>
                             @foreach ($fluxoatividades as $fluxoatividade) 
                                 <tr>
-                                    <td> {{$fluxoatividade->id}} </td>
                                     <td> {{$fluxoatividade->equipe->nome}} </td>
                                     <td> {{$fluxoatividade->equipe->user->name}} </td>
                                     <td> {{$fluxoatividade->precedencia}} </td>
@@ -54,7 +52,7 @@
                                     <td> 
                                         <a href='{{route('fluxos.finalizar', $fluxoatividade->id)}}'
                                             class='btn btn-success' 
-                                            role='button'> <span class="glyphicon glyphicon-ok"></span> Finalizar 
+                                            role='button'> <span class="glyphicon glyphicon-ok"></span>  
                                         </a> 
                                     </td>
                                 </tr>

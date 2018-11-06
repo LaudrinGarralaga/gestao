@@ -87,6 +87,20 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label for="password2">Confirme a Senha:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </div>    
+                                <input type="password" class="form-control" id="password2" 
+                                    name="password_confirmation" placeholder="Confirme a senha"
+                                    value="{{$reg->password or old('password')}}"                   
+                                    required>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
                             <label for="nome">Equipe:</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
@@ -106,9 +120,9 @@
             </div>
             <div class="col-sm-6"></div>
         </div>   
-        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button> 
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button> 
     </form>    
 </form>
-            </div>
+</div>
 
 @stop

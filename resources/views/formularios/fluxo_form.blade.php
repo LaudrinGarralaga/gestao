@@ -44,7 +44,7 @@
                     {!! method_field('put') !!}
                     @endif
                     {{ csrf_field() }}
-                    <div class="col-sm-6">
+                    <div class="col-sm-9">
                         <div class="form-group">
                             <label for="descricao">Descrição da Sequência:</label>
                             <div class="input-group">
@@ -58,13 +58,12 @@
                             </div>
                         </div>
                     </div>     
-                    <div class="col-sm-6">      
-                        <div class="form-group">
-                            <div class="contacts">
-                                <label>Selecione a equipe e digite a precedência:</label>
+                    <div class="col-sm-3">      
+                        <div class="form-group">                    
+                                <label>Equipe/Precedência:</label>
                                 <div class="form-group multiple-form-group input-group">
                                     <div class="input-group-btn input-group-select">
-                                        <select class="form-control" id="equipe_id" name="equipe[]">
+                                        <select class="form-control" id="equipe_id" name="equipe[]" style="width: 110px">
                                             @foreach ($equipes as $equipe)    
                                             <option value="{{$equipe->id}}" 
                                             @if ((isset($reg) && $reg->equipe_id==$equipe->id) 
@@ -73,17 +72,16 @@
                                             @endforeach    
                                         </select>    
                                     </div>
-                                    <input type="number" name="precedencia[]" class="form-control" placeholder="Qual a precedência?">
-                                    <span class="input-group-btn">
+                                    <input type="number" name="precedencia[]" class="form-control" placeholder="Precedência" style="width: 120px" min="1" max="99">
+                                    &nbsp;
                                         <button type="button" class="btn btn-success btn-add">+</button>
-                                    </span>
-                                </div>
-                            </div>
+                                   
+                                </div>                    
                         </div>
                     </div>            
                 </div>
             </div>     
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span> Salvar</button>       
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button>       
         </form>
     </form>
 @stop

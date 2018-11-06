@@ -132,7 +132,23 @@ class EquipeController extends Controller
             ->where('equipe_id', '=', $id)
             ->get();
 
-        return view('listas.equipedetalhes_list', compact('equipemembros', 'titulos'));
+        return view('listas.equipedetalhes_list', compact('equipemembros', 'titulos', 'id'));
     }
 
+    public function responsavel($id)
+    {
+        $membroID = DB::table('membrosequipes')
+        ->select('user_id', 'equipe_id')
+        ->where('id', '=', $id)
+        ->get();
+       
+        for ($i = 0; $i < count($membroID); $i++) { 
+            Equipe::where('id', '=',  $membroID[$i]->equipe_id)
+            ->update(['user_id' => $membroID[$i]->user_id]);
+
+        }
+
+        return redirect()->route('equipes.index')
+        ->with('status',  ' Responsável Alterado!');
+    }
 }

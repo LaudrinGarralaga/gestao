@@ -49,7 +49,7 @@
                                     <td style="width: 20%; text-align: center"> 
                                         <a href='{{route('areas.edit', $area->id)}}'
                                             class='btn btn-warning' 
-                                            role='button'> <span class="glyphicon glyphicon-pencil"></span> Alterar 
+                                            role='button'> <span class="glyphicon glyphicon-pencil"></span>  
                                         </a>
                                         <form style="display: inline-block"
                                             method="post"
@@ -57,7 +57,7 @@
                                             onsubmit="return confirm('Confirma Exclusão?')">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir </button>
+                                            <button type="submit"class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  </button>
                                         </form>                                
                                     </td>                         
                                 </tr>          
@@ -78,7 +78,7 @@
         </div>
     </div>
 </div>
-<a href='{{route('areas.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-new-window"></span> Novo </a>
+<a href='{{route('areas.create')}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-plus"></span> Novo </a>
 @stop
 
 @section('js')
