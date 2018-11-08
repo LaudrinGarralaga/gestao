@@ -29,7 +29,7 @@
                 <td> {{$etapa->id}} </td>
                 <td> {{$etapa->area->sigla}} </td>
                 <td> {{$etapa->fluxo->descricao}} </td>
-                <td> <a href='{{route('etapas.edit', $etapa->id)}}'
+                <td style="width: 5%"> <a href='{{route('etapas.edit', $etapa->id)}}'
                         class='btn btn-info' 
                         role='button'> <span class="glyphicon glyphicon-pencil"></span>  
                     </a>

@@ -44,7 +44,7 @@
                 {{ csrf_field() }}
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label for="nome">Nome da Área:</label>
+                        <label for="nome">Nome da Área/Departamento:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-info"></i>

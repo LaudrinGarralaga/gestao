@@ -45,10 +45,10 @@
                         <tbody>
                             @foreach ($users as $user) 
                                 <tr>
-                                    <td style="width: 25%"> {{$user->name}} </td>
-                                    <td style="width: 25%"> {{Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}} </td>
-                                    <td style="width: 25%"> {{Carbon\Carbon::parse($user->created_at)->format('h:m:s')}} </td>
-                                    <td style="width: 15%; text-align: center">
+                                    <td style="width: 30%"> {{$user->name}} </td>
+                                    <td style="width: 30%"> {{Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}} </td>
+                                    <td style="width: 30%"> {{Carbon\Carbon::parse($user->created_at)->format('h:m:s')}} </td>
+                                    <td style="width: 8%; text-align: center">
                                         <a href='{{route('users.edit', $user->id)}}'
                                             class='btn btn-warning' 
                                             role='button'> <span class="glyphicon glyphicon-pencil"></span>  

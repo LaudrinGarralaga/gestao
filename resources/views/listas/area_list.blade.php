@@ -44,9 +44,9 @@
                         <tbody>
                             @foreach ($areas as $area) 
                                 <tr>
-                                    <td style="width: 40%"> {{$area->nome}} </td>
-                                    <td style="width: 40%"> {{$area->sigla}} </td>
-                                    <td style="width: 20%; text-align: center"> 
+                                    <td style="width: 46%"> {{$area->nome}} </td>
+                                    <td style="width: 46%"> {{$area->sigla}} </td>
+                                    <td style="width: 8%; text-align: center"> 
                                         <a href='{{route('areas.edit', $area->id)}}'
                                             class='btn btn-warning' 
                                             role='button'> <span class="glyphicon glyphicon-pencil"></span>  

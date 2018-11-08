@@ -57,15 +57,15 @@
                         <tbody>
                             @foreach ($equipemembros  as $equipemembro) 
                                 <tr>
-                                    <td style="width: 30%"> {{$equipemembro->name}} </td>
-                                    <td style="width: 30%"> {{$equipemembro->nome}} </td>
-                                    <td style="width: 20%">
+                                    <td style="width: 35%"> {{$equipemembro->name}} </td>
+                                    <td style="width: 35%"> {{$equipemembro->nome}} </td>
+                                    <td style="width: 25%">
                                         <a href='{{route('equipe.responsavel', $equipemembro->id)}}'
                                             class='btn btn-success' 
                                             role='button'> <span class="glyphicon glyphicon-ok"></span>  
                                         </a> 
                                     </td>
-                                    <td style="width: 10%">     
+                                    <td style="width: 5%; text-align: center">     
                                         <form style="display: inline-block"
                                             method="post"
                                             action="{{route('equipesmembros.destroy', $equipemembro->id)}}"
@@ -91,7 +91,9 @@
         </div>
     </div>
 </div>
-
+<a href='{{route('equipemembros.adicionar', $equipemembro->equipe_id)}}' class='btn btn-primary' role='button'> 
+    <span class="glyphicon glyphicon-plus"> Novo</span> 
+</a>
 @stop
 
 @section('js')

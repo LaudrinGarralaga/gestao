@@ -44,8 +44,8 @@
                         <tbody>
                             @foreach ($fluxos as $fluxo) 
                                 <tr>
-                                    <td style="width: 70%"> {{$fluxo->descricao}} </td>
-                                    <td style="width: 30%;text-align: center">
+                                    <td style="width: 88%"> {{$fluxo->descricao}} </td>
+                                    <td style="width: 11%;text-align: center">
                                         <a href='{{route('fluxos.adicionar', $fluxo->id)}}'
                                             class='btn btn-success' 
                                             role='button'> <span class="glyphicon glyphicon-plus"></span>  

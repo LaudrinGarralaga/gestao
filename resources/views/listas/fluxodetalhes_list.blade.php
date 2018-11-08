@@ -49,7 +49,7 @@
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
                                         @endif
                                     </td>
-                                    <td> 
+                                    <td style="width: 5%; text-align: center"> 
                                         <a href='{{route('fluxos.finalizar', $fluxoatividade->id)}}'
                                             class='btn btn-success' 
                                             role='button'> <span class="glyphicon glyphicon-ok"></span>  

@@ -38,16 +38,23 @@
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Área/Departamento</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Responsável</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($equipes as $equipe) 
                                 <tr>
-                                    <td style="width: 20%"> {{$equipe->nome}} </td>
-                                    <td style="width: 20%"> {{$equipe->area->sigla}} </td>
-                                    <td style="width: 25%; text-align: center"> <a href='{{route('equipemembros.adicionar', $equipe->id)}}'
+                                    <td style="width: 31%"> {{$equipe->nome}} </td>
+                                    <td style="width: 31%"> {{$equipe->area->sigla}} </td>
+                                    <td style="width: 21%"> 
+                                        @if( is_null($equipe->user))
+                                                                                                                            
+                                        @else
+                                        {{$equipe->user->name}} 
+                                        @endif               
+                                    </td>      
+                                    <td style="width: 14%; text-align: center"> <a href='{{route('equipemembros.adicionar', $equipe->id)}}'
                                         class='btn btn-success' 
                                         role='button'> <span class="glyphicon glyphicon-plus"></span>  
                                         </a>
@@ -67,14 +74,7 @@
                                             {{ csrf_field() }}
                                             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button>
                                         </form>                                
-                                    </td>     
-                                    <td style="width: 20%"> 
-                                        @if( is_null($equipe->user))
-                                                                                                                            
-                                        @else
-                                        {{$equipe->user->name}} 
-                                        @endif               
-                                    </td>                    
+                                    </td>                   
                                 </tr>   
                             @endforeach
                         </tbody>

@@ -128,7 +128,7 @@ class EquipeController extends Controller
         $equipemembros = DB::table('membrosequipes')
             ->join('equipes', 'membrosequipes.equipe_id', '=', 'equipes.id')
             ->join('users', 'membrosequipes.user_id', '=', 'users.id')
-            ->select('users.name', 'equipes.nome', 'membrosequipes.id')
+            ->select('users.name', 'equipes.nome', 'membrosequipes.id', 'membrosequipes.equipe_id')
             ->where('equipe_id', '=', $id)
             ->get();
 
