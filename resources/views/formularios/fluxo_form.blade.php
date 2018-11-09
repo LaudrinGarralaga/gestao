@@ -44,7 +44,7 @@
                     {!! method_field('put') !!}
                     @endif
                     {{ csrf_field() }}
-                    <div class="col-sm-9">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <label for="descricao">Descrição da Sequência:</label>
                             <div class="input-group">
@@ -58,12 +58,12 @@
                             </div>
                         </div>
                     </div>     
-                    <div class="col-sm-3">      
+                    <div class="col-sm-7">      
                         <div class="form-group">                    
                                 <label>Equipe/Precedência:</label>
                                 <div class="form-group multiple-form-group input-group">
                                     <div class="input-group-btn input-group-select">
-                                        <select class="form-control" id="equipe_id" name="equipe[]" style="width: 110px">
+                                        <select class="form-control" id="equipe_id" name="equipe[]" style="width: 380px">
                                             @foreach ($equipes as $equipe)    
                                             <option value="{{$equipe->id}}" 
                                             @if ((isset($reg) && $reg->equipe_id==$equipe->id) 
@@ -74,8 +74,7 @@
                                     </div>
                                     <input type="number" name="precedencia[]" class="form-control" placeholder="Precedência" style="width: 120px" min="1" max="99">
                                     &nbsp;
-                                        <button type="button" class="btn btn-success btn-add">+</button>
-                                   
+                                    <button type="button" class="btn btn-success btn-add">+</button>
                                 </div>                    
                         </div>
                     </div>            

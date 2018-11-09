@@ -7,7 +7,7 @@
 @foreach ($titulos  as $titulo) 
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Inclusão de Membros na Equipe > {{$titulo->nome}}</p> 
+                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Inclusão de Membros na Equipe: {{$titulo->nome}}</p> 
             </div>
         </div>
     @endforeach
@@ -15,7 +15,7 @@
 @foreach ($titulos  as $titulo) 
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Alteração de Membros da Equipe > {{$titulo->nome}}</p> 
+                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Alteração de Membros da Equipe: {{$titulo->nome}}</p> 
             </div>
         </div>
     @endforeach
@@ -50,29 +50,37 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="nome">Membro:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
+                    <div class="form-group multiple-form-group input-group">
+                        <div class="input-group-btn input-group-select">
+                            <select class="form-control" id="user_id" name="user[]" style="width: 500px">
+                                @foreach ($users as $user)    
+                                <option value="{{$user->id}}" 
+                                @if ((isset($reg) && $reg->user_id==$user->id) 
+                                or old('user_id') == $user->id) selected @endif>
+                                {{$user->name}}</option>
+                                @endforeach    
+                            </select>    
                         </div>
-                        <select class="form-control" id="user_id" name="user_id" >
-                            @foreach ($users as $user)    
-                            <option value="{{$user->id}}" 
-                                    @if ((isset($reg) && $reg->user_id==$user->id) 
-                                    or old('user_id') == $user->id) selected @endif>
-                                    {{$user->name}}</option>
-                            @endforeach    
-                        </select>
+                        &nbsp;
+                        <button type="button" class="btn btn-success btn-add">+</button>                
                     </div>
                     <input type="text" id="equipe_id" name="equipe_id" value="{{$registro->id}}" style="display:none">
                 </div>
             </div>
-           
         </div>
         </div>
             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-open"></span> Salvar</button>
         </form>    
     </form>
 
+@stop
+
+@section('js')
+<script src="{{asset('/js/myscripts.js')}}"></script>
+@stop
+
+@section('css')
+<link href="{{asset('/css/main.css')}}" rel="stylesheet">
 @stop
 
 

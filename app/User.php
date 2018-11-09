@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function membrosequipe()
     {
-        return $this->belongsTo('App\Membrosequipe');
+        return $this->HasMany('App\Membrosequipe');
     }
 
     public function notificacao()

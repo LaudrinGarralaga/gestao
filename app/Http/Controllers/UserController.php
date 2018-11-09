@@ -76,6 +76,16 @@ class UserController extends Controller
 
         // obtém os dados do registro a ser editado
         $reg = User::find($id);
+       
+        //$reg = User::with('membrosequipe')->where('id', $id)->get();
+        //dd($reg);
+
+        /*$reg = DB::table('users')
+        ->join('membrosequipes', 'users.id', '=', 'membrosequipes.user_id')
+        ->select( 'users.id', 'users.name', 'users.email', 'users.password',  'users.remember_token',  'users.created_at', 'users.updated_at', 'membrosequipes.equipe_id')
+        ->where('users.id', '=', $id)
+        ->get();
+        */
 
         /* if (Gate::denies('Atu_Area', $reg)) {
         abort(403, 'Não autorizado');
@@ -95,7 +105,7 @@ class UserController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-
+        
         $reg = User::find($id);
 
         /*
@@ -109,16 +119,15 @@ class UserController extends Controller
         $user3 = bcrypt($request->password);
         $user4 = $request->equipe_id;
 
-        $teste = DB::table('membrosequipes')
+        /*$teste = DB::table('membrosequipes')
             ->where('user_id', $id)
             ->count();
 
-        if ($teste = 0) {
+        if ($teste = 0) {*/
             $user = new Membrosequipe;
-            $user1->user_id = $id;
-            $user2->equipe_id = $equipe_id;
+            $user->user_id = $id;
+            $user->equipe_id = $user4;
             $user->save();
-            dd($user1);
 
             $dados = DB::table('users')
                 ->where('id', $id)
@@ -128,7 +137,7 @@ class UserController extends Controller
                 return redirect()->route('users.index')
                     ->with('status', $request->name . ' Alterado!');
             }
-        } else {
+       /* } else {
 
             $dados1 = DB::table('membrosequipes')
                 ->where('id', $id)
@@ -141,8 +150,7 @@ class UserController extends Controller
             if ($dados) {
                 return redirect()->route('users.index')
                     ->with('status', $request->name . ' Alterado!');
-            }
-        }
+             }*/
 
     }
 

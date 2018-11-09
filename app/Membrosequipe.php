@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Membrosequipe extends Model
 {
     protected $fillable = array('user_id', 'equipe_id', 'visto');
+    protected $table = 'membrosequipes';
     public $timestamps = false;
 
     public function equipe()
     {
-        return $this->belongsTo('App\Equipe');
+        return $this->HasMany('App\Equipe');
     }
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->HasMany('App\User');
     }
 }

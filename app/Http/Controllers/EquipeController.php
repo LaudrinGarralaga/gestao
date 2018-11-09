@@ -131,7 +131,11 @@ class EquipeController extends Controller
             ->select('users.name', 'equipes.nome', 'membrosequipes.id', 'membrosequipes.equipe_id')
             ->where('equipe_id', '=', $id)
             ->get();
-
+        
+        if ($equipemembros->isEmpty()){
+            $equipemembros->equipe_id = $id;
+        }
+           
         return view('listas.equipedetalhes_list', compact('equipemembros', 'titulos', 'id'));
     }
 

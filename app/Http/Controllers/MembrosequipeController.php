@@ -53,16 +53,21 @@ class MembrosequipeController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-        
-        $fluxoadd = new Membrosequipe;
-        $fluxoadd->equipe_id = $request->equipe_id;
-        $fluxoadd->user_id =  $request->user_id;
-        $fluxoadd->save();
 
-        if ($fluxoadd) {
+        $equipe_id = $request->equipe_id;
+        $user = $request->user;
+
+        for ($i = 0; $i < count($request->user); $i++) {
+            Membrosequipe::create([
+                'equipe_id' => $equipe_id,
+                'user_id' => $request->user[$i],
+            ]);
+        }
+
+        
             return redirect()->route('equipes.index')
                 ->with('status', $request->sigla . ' Incluído!');
-        }
+        
     }
 
     public function show($id)

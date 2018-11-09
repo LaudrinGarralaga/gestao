@@ -8,14 +8,14 @@
     @foreach ($titulos  as $titulo) 
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe > {{$titulo->nome}}</p> 
+                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$titulo->nome}}</p> 
             </div>
         </div>
     @endforeach
 @else
     @foreach ($equipemembros  as $equipemembro) 
         <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe > {{$equipemembro->nome}}</p> 
+            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$equipemembro->nome}}</p> 
         </div>
     @endforeach
 @endif  
@@ -91,9 +91,14 @@
         </div>
     </div>
 </div>
-<a href='{{route('equipemembros.adicionar', $equipemembro->equipe_id)}}' class='btn btn-primary' role='button'> 
-    <span class="glyphicon glyphicon-plus"> Novo</span> 
+
+@if (count($equipemembros) === 0)
+<a href='{{route('equipemembros.adicionar', $equipemembros->equipe_id)}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-plus"></span> Novo </a>
 </a>
+@else
+<a href='{{route('equipemembros.adicionar', $equipemembro->equipe_id)}}' class='btn btn-primary' role='button'><span class="glyphicon glyphicon-plus"></span> Novo </a>
+</a>
+@endif
 @stop
 
 @section('js')

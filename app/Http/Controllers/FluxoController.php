@@ -164,20 +164,28 @@ class FluxoController extends Controller
     {
 
         $equipes = Equipe::orderBy('nome')->get();
-        $titulos = DB::table('fluxos')->where('id', '=', $id)->get();
+        $fluxos = Fluxo::where('id', '=', $id)->get();
         $acao = 1;
 
-        return view('formularios.fluxoadicionar_form', compact('acao', 'equipes', 'id', 'titulos'));
+        return view('formularios.fluxoadicionar_form', compact('acao', 'equipes', 'id', 'fluxos'));
     }
 
     public function adicionarSalvar(Request $request, $id)
     {
 
-        $fluxoadd = new FluxoAtividade;
-        $fluxoadd->equipe_id = $request->equipe_id;
-        $fluxoadd->fluxo_id = $id;
-        $fluxoadd->precedencia = $request->precedencia;
-        $fluxoadd->save();
+        $equipe = $request->equipe;
+        $precedencia = $request->precedencia;
+        $descricao = $request->descricao;
+
+        $id = DB::getPdo()->lastInsertId();
+
+        for ($i = 0; $i < count($request->equipe); $i++) {
+            FluxoAtividade::create([
+                'fluxo_id' => $id,
+                'equipe_id' => $request->equipe[$i],
+                'precedencia' => $request->precedencia[$i],
+            ]);
+        }
 
         if ($fluxoadd) {
             return redirect()->route('fluxos.index')
