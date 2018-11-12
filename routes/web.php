@@ -28,7 +28,7 @@ Route::resource('rusers', 'RegraController');
 Route::resource('users', 'UserController');
 Route::resource('fluxos', 'FluxoController');
 Route::resource('equipes', 'EquipeController');
-Route::resource('equipesmembros', 'MembrosEquipeController');
+Route::resource('equipesmembros', 'MembrosequipeController');
 Route::get('equipemembro/{id}', 'EquipeController@Adicionar')
     ->name('equipes.adicionar');
 Route::get('equipedetalhes/{id}', 'EquipeController@detalhes')
