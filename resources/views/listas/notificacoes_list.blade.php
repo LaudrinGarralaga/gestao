@@ -42,12 +42,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($notificacoes as $notificacao) 
+                            @foreach ($notificacoes as $notificacoe) 
                                 <tr>
-                                    <td style="width: 40%"> {{$notificacao->user->name}} </td>
-                                    <td style="width: 40%"> {{$notificacao->fluxo}} </td>
-                                    <td style="width: 20%; text-align: center">                                         
-                                        <a href='{{route('notificacao.finalizar', $notificacao->id)}}'
+                                    <td style="width: 47%"> {{$notificacoe->user->name}} </td>
+                                    <td style="width: 47%"> {{$notificacoe->fluxo->descricao}} </td>
+                                    <td style="width: 5%; text-align: center">                                         
+                                        <a href='{{route('notificacao.finalizar', $notificacoe->id)}}'
                                         class='btn btn-success' 
                                         role='button'><i class="fa fa-close"></i>  
                                         </a>                                                                  

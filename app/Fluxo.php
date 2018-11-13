@@ -18,7 +18,7 @@ class Fluxo extends Model
 
     public function notificacao()
     {
-        return $this->belongsTo('App\Notificacao');
+        return $this->HasMany('App\Notificacao');
     }
 
 }

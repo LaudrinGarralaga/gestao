@@ -41,7 +41,11 @@
                             @foreach ($fluxoatividades as $fluxoatividade) 
                                 <tr>
                                     <td> {{$fluxoatividade->equipe->nome}} </td>
-                                    <td> {{$fluxoatividade->equipe->user->name}} </td>
+                                    @if(empty($fluxoatividade->equipe->user->name))
+                                    <td> </td>
+                                    @else 
+                                    <td>{{$fluxoatividade->equipe->user->name}}</td>
+                                    @endif
                                     <td> {{$fluxoatividade->precedencia}} </td>
                                     <td> @if($fluxoatividade->finalizado == 0)
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">

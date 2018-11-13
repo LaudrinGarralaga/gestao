@@ -25,4 +25,9 @@ class FluxoAtividade extends Model
         return $this->belongsTo('App\Fluxo');
     }
 
+    public function notificacao()
+    {
+        return $this->HasMany('App\Notificacao');
+    }
+
 }

@@ -154,8 +154,11 @@ class FluxoController extends Controller
     public function detalhes($id)
     {
 
-        $fluxoatividades = Fluxoatividade::where('fluxo_id', '=', $id)->get();
+        $fluxoatividades = Fluxoatividade::join('equipes', 'fluxoatividades.equipe_id', '=', 'equipes.id')
+        ->where('fluxo_id', '=', $id)->get();
         $fluxos = Fluxo::where('id', '=', $id)->get();
+
+        //dd($fluxoatividades);
 
         return view('listas.fluxodetalhes_list', compact('fluxoatividades', 'fluxos'));
     }

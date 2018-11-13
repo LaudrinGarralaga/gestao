@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notificacao;
+use App\Fluxo;
+use App\FluxoAtividade;
 use Illuminate\Support\Facades\DB;
 
 class NotificacaoController extends Controller
@@ -17,15 +19,14 @@ class NotificacaoController extends Controller
         }
 
         $id = Auth::id();
-        $notificacoes = Notificacao::where([
-            ['user_id', '=', $id],
-            ['visto', '<>', '1']
-            ])->GET();
-        
+        $notificacoes = FluxoAtividade::join('notificacoes', 'fluxoatividade_id', '=', 'fluxoatividades.id')
+            ->join('fluxos', 'fluxo_id', '=', 'fluxos.id')
+            ->where([['user_id', '=', $id],['visto', '<>', '1']])
+            ->get();
+
         /*$dados = DB::table('notificacoes')
             ->where('user_id', '=', $id)
             ->update(['visto' => 1]);*/
-        //dd($notificacoes);
 
         return view('listas.notificacoes_list', compact('notificacoes'));
     }

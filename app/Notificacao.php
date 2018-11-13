@@ -16,10 +16,14 @@ class Notificacao extends Model
     }
     public function fluxo()
     {
-        return $this->belongsTo('App\Fluxo');
+        return $this->HasMany('App\Fluxo');
     }
     public function equipe()
     {
         return $this->belongsTo('App\Equipe');
+    }
+    public function fluxoatividade()
+    {
+        return $this->HasMany('App\FluxoAtividade');
     }
 }
