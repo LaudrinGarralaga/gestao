@@ -131,28 +131,28 @@ class EquipeController extends Controller
             ->select('users.name', 'equipes.nome', 'membrosequipes.id', 'membrosequipes.equipe_id')
             ->where('equipe_id', '=', $id)
             ->get();
-        
-        if ($equipemembros->isEmpty()){
+
+        if ($equipemembros->isEmpty()) {
             $equipemembros->equipe_id = $id;
         }
-           
+
         return view('listas.equipedetalhes_list', compact('equipemembros', 'titulos', 'id'));
     }
 
     public function responsavel($id)
     {
         $membroID = DB::table('membrosequipes')
-        ->select('user_id', 'equipe_id')
-        ->where('id', '=', $id)
-        ->get();
-       
-        for ($i = 0; $i < count($membroID); $i++) { 
-            Equipe::where('id', '=',  $membroID[$i]->equipe_id)
-            ->update(['user_id' => $membroID[$i]->user_id]);
+            ->select('user_id', 'equipe_id')
+            ->where('id', '=', $id)
+            ->get();
+
+        for ($i = 0; $i < count($membroID); $i++) {
+            Equipe::where('id', '=', $membroID[$i]->equipe_id)
+                ->update(['user_id' => $membroID[$i]->user_id]);
 
         }
 
         return redirect()->route('equipes.index')
-        ->with('status',  ' Responsável Alterado!');
+            ->with('status', ' Responsável Alterado!');
     }
 }

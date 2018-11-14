@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notificacao extends Model
 {
-    protected $fillable = array('user_id','atividade_id', 'visto');
+    protected $fillable = array('user_id', 'atividade_id', 'visto');
     protected $table = 'notificacoes';
     public $timestamps = false;
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Equipe;
+use App\Http\Requests\UserStoreUpdateFormRequest;
 use App\Membrosequipe;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UserStoreUpdateFormRequest;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -76,7 +75,7 @@ class UserController extends Controller
 
         // obtém os dados do registro a ser editado
         $reg = User::find($id);
-       
+
         //$reg = User::with('membrosequipe')->where('id', $id)->get();
         //dd($reg);
 
@@ -85,7 +84,7 @@ class UserController extends Controller
         ->select( 'users.id', 'users.name', 'users.email', 'users.password',  'users.remember_token',  'users.created_at', 'users.updated_at', 'membrosequipes.equipe_id')
         ->where('users.id', '=', $id)
         ->get();
-        */
+         */
 
         /* if (Gate::denies('Atu_Area', $reg)) {
         abort(403, 'Não autorizado');
@@ -105,7 +104,7 @@ class UserController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-        
+
         $reg = User::find($id);
 
         /*
@@ -120,37 +119,37 @@ class UserController extends Controller
         $user4 = $request->equipe_id;
 
         /*$teste = DB::table('membrosequipes')
-            ->where('user_id', $id)
-            ->count();
+        ->where('user_id', $id)
+        ->count();
 
         if ($teste = 0) {*/
-            $user = new Membrosequipe;
-            $user->user_id = $id;
-            $user->equipe_id = $user4;
-            $user->save();
+        $user = new Membrosequipe;
+        $user->user_id = $id;
+        $user->equipe_id = $user4;
+        $user->save();
 
-            $dados = DB::table('users')
-                ->where('id', $id)
-                ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
+        $dados = DB::table('users')
+            ->where('id', $id)
+            ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
 
-            if ($dados) {
-                return redirect()->route('users.index')
-                    ->with('status', $request->name . ' Alterado!');
-            }
-       /* } else {
+        if ($dados) {
+            return redirect()->route('users.index')
+                ->with('status', $request->name . ' Alterado!');
+        }
+        /* } else {
 
-            $dados1 = DB::table('membrosequipes')
-                ->where('id', $id)
-                ->update(['user_id' => $id, 'equipe_id' => $user4]);
+    $dados1 = DB::table('membrosequipes')
+    ->where('id', $id)
+    ->update(['user_id' => $id, 'equipe_id' => $user4]);
 
-            $dados = DB::table('users')
-                ->where('id', $id)
-                ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
+    $dados = DB::table('users')
+    ->where('id', $id)
+    ->update(['name' => $user1, 'email' => $user2, 'password' => $user3]);
 
-            if ($dados) {
-                return redirect()->route('users.index')
-                    ->with('status', $request->name . ' Alterado!');
-             }*/
+    if ($dados) {
+    return redirect()->route('users.index')
+    ->with('status', $request->name . ' Alterado!');
+    }*/
 
     }
 

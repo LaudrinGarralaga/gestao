@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
 use App\Notificacao;
-use App\FluxoAtividade;
-use App\Equipe;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,13 +25,13 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth::id();
-        
+
         $notificacao = Notificacao::where([
             ['user_id', '=', $id],
-            ['visto', '=', 0]
+            ['visto', '=', 0],
         ])
-        ->count();
-        
+            ->count();
+
         return view('home', compact('notificacao'));
     }
 }

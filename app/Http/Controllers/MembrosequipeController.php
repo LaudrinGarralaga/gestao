@@ -8,8 +8,8 @@ use App\Membrosequipe;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class MembrosequipeController extends Controller
 {
@@ -22,7 +22,7 @@ class MembrosequipeController extends Controller
         }
 
         $equipemembros = Membrosequipe::All();
-       
+
         return view('listas.equipedetalhes_list', compact('equipemembros'));
     }
 
@@ -64,10 +64,9 @@ class MembrosequipeController extends Controller
             ]);
         }
 
-        
-            return redirect()->route('equipes.index')
-                ->with('status', $request->sigla . ' Incluído!');
-        
+        return redirect()->route('equipes.index')
+            ->with('status', $request->sigla . ' Incluído!');
+
     }
 
     public function show($id)
@@ -124,7 +123,8 @@ class MembrosequipeController extends Controller
         }
     }
 
-    public function adicionar($id) {
+    public function adicionar($id)
+    {
 
         if (!Auth::check()) {
             return redirect('/');
@@ -134,15 +134,15 @@ class MembrosequipeController extends Controller
             ->select('nome')
             ->where('id', '=', $id)
             ->get();
-    
+
         // indica inclusão
         $acao = 1;
 
         $registro = Equipe::find($id);
 
         $users = User::orderBy('name')->get();
-       
+
         return view('formularios.equipemembros_form', compact('acao', 'titulos', 'users', 'registro'));
     }
-    
+
 }
