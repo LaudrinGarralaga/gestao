@@ -5,31 +5,31 @@
 @section('content_header') 
 
 @if ($equipemembros != " ")
-    @foreach ($titulos  as $titulo) 
-        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
-            <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$titulo->nome}}</p> 
-            </div>
-        </div>
-    @endforeach
+@foreach ($titulos  as $titulo) 
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+    <div class="bred">
+        <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$titulo->nome}}</p> 
+    </div>
+</div>
+@endforeach
 @else
-    @foreach ($equipemembros  as $equipemembro) 
-        <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$equipemembro->nome}}</p> 
-        </div>
-    @endforeach
+@foreach ($equipemembros  as $equipemembro) 
+<div class="bred">
+    <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Lista de Membros da Equipe: {{$equipemembro->nome}}</p> 
+</div>
+@endforeach
 @endif  
 @stop
 
 @section('content')
 
 @if (session('status'))
-    <div class="container">
-        <div class="alert alert-success alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            {{ session('status') }}
-        </div>
+<div class="container">
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ session('status') }}
     </div>
+</div>
 @endif
 
 <div class="box box-success">
@@ -56,26 +56,26 @@
                         </thead>
                         <tbody>
                             @foreach ($equipemembros  as $equipemembro) 
-                                <tr>
-                                    <td style="width: 35%"> {{$equipemembro->name}} </td>
-                                    <td style="width: 35%"> {{$equipemembro->nome}} </td>
-                                    <td style="width: 25%">
-                                        <a href='{{route('equipe.responsavel', $equipemembro->id)}}'
-                                            class='btn btn-success' 
-                                            role='button'> <span class="glyphicon glyphicon-ok"></span>  
-                                        </a> 
-                                    </td>
-                                    <td style="width: 5%; text-align: center">     
-                                        <form style="display: inline-block"
-                                            method="post"
-                                            action="{{route('equipesmembros.destroy', $equipemembro->id)}}"
-                                            onsubmit="return confirm('Confirma Exclusão?')">
-                                            {{ method_field('delete') }}
-                                            {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  </button>
-                                        </form>    
-                                    </td>                         
-                                </tr>   
+                            <tr>
+                                <td style="width: 35%"> {{$equipemembro->name}} </td>
+                                <td style="width: 35%"> {{$equipemembro->nome}} </td>
+                                <td style="width: 25%">
+                                    <a href='{{route('equipe.responsavel', $equipemembro->id)}}'
+                                       class='btn btn-success' 
+                                       role='button'> <span class="glyphicon glyphicon-ok"></span>  
+                                    </a> 
+                                </td>
+                                <td style="width: 5%; text-align: center">     
+                                    <form style="display: inline-block"
+                                          method="post"
+                                          action="{{route('equipesmembros.destroy', $equipemembro->id)}}"
+                                          onsubmit="return confirm('Confirma Exclusão?')">
+                                        {{ method_field('delete') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  </button>
+                                    </form>    
+                                </td>                         
+                            </tr>   
                             @endforeach
                         </tbody>
                     </table>
@@ -106,32 +106,32 @@
 <script src="{{asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')}}"></script> 
 <script src="{{asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js')}}"></script> 
 <script>
-$(document).ready(function() {
-            $('#example1').DataTable( {
-                "language": { "sEmptyTable": "Nenhum registro encontrado",
-                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ".",
-                "sLengthMenu": "_MENU_ resultados por página",
-                "sLoadingRecords": "Carregando...",
-                "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum registro encontrado",
-                "sSearch": "Pesquisar",
-                "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
-            },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
-        }
-    } );
-} );
+                                              $(document).ready(function () {
+                                                  $('#example1').DataTable({
+                                                      "language": {"sEmptyTable": "Nenhum registro encontrado",
+                                                          "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                                                          "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                                                          "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                                                          "sInfoPostFix": "",
+                                                          "sInfoThousands": ".",
+                                                          "sLengthMenu": "_MENU_ resultados por página",
+                                                          "sLoadingRecords": "Carregando...",
+                                                          "sProcessing": "Processando...",
+                                                          "sZeroRecords": "Nenhum registro encontrado",
+                                                          "sSearch": "Pesquisar",
+                                                          "oPaginate": {
+                                                              "sNext": "Próximo",
+                                                              "sPrevious": "Anterior",
+                                                              "sFirst": "Primeiro",
+                                                              "sLast": "Último"
+                                                          },
+                                                          "oAria": {
+                                                              "sSortAscending": ": Ordenar colunas de forma ascendente",
+                                                              "sSortDescending": ": Ordenar colunas de forma descendente"
+                                                          }
+                                                      }
+                                                  });
+                                              });
 </script>
 @stop
 

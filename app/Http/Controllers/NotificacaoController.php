@@ -17,7 +17,7 @@ class NotificacaoController extends Controller
         }
 
         $id = Auth::id();
-        $notificacoes = FluxoAtividade::join('notificacoes', 'fluxoatividade_id', '=', 'fluxoatividades.id')
+        $notificacoes = FluxoAtividade::join('notificacoes', 'atividade_id', '=', 'fluxoatividades.id')
             ->join('fluxos', 'fluxo_id', '=', 'fluxos.id')
             ->where([['user_id', '=', $id], ['visto', '<>', '1']])
             ->get();

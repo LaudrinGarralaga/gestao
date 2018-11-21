@@ -3,13 +3,13 @@
 @section('title', 'Detalhes do Fluxo')
 
 @section('content_header')
-    @foreach ($fluxos as $fluxo) 
-        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
-            <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Detalhes do Fluxo: {{$fluxo->descricao}}</p> 
-            </div>
-        </div>
-    @endforeach
+@foreach ($fluxos as $fluxo) 
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+    <div class="bred">
+        <p style="font-family: Arial; font-size: 20px; color: darkcyan; margin-left: 20px; margin-top: 15px">Detalhes do Fluxo: {{$fluxo->descricao}}</p> 
+    </div>
+</div>
+@endforeach
 @stop
 
 @section('content')
@@ -39,27 +39,31 @@
                         </thead>
                         <tbody>
                             @foreach ($fluxoatividades as $fluxoatividade) 
-                                <tr>
-                                    <td> {{$fluxoatividade->equipe->nome}} </td>
-                                    @if(empty($fluxoatividade->equipe->user->name))
-                                    <td> </td>
-                                    @else 
-                                    <td>{{$fluxoatividade->equipe->user->name}}</td>
+                            <tr>
+                                <td> {{$fluxoatividade->equipe->nome}} </td>
+                                @if(empty($fluxoatividade->equipe->user->name))
+                                <td> </td>
+                                @else 
+                                <td>{{$fluxoatividade->equipe->user->name}}</td>
+                                @endif
+                                <td> {{$fluxoatividade->precedencia}} </td>
+                                <td> @if($fluxoatividade->finalizado == 0)
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    @else
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
                                     @endif
-                                    <td> {{$fluxoatividade->precedencia}} </td>
-                                    <td> @if($fluxoatividade->finalizado == 0)
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        @else
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                                        @endif
-                                    </td>
-                                    <td style="width: 5%; text-align: center"> 
-                                        <a href='{{route('fluxos.finalizar', $fluxoatividade->id)}}'
-                                            class='btn btn-success' 
-                                            role='button'> <span class="glyphicon glyphicon-ok"></span>  
-                                        </a> 
-                                    </td>
-                                </tr>
+                                </td>
+                                <td style="width: 5%; text-align: center"> 
+                                    @if($fluxoatividade->finalizado == 0)
+                                    <a href='{{route('fluxos.finalizar', $fluxoatividade->id)}}'
+                                       class='btn btn-success' 
+                                       role='button'> <span class="glyphicon glyphicon-ok"></span>  
+                                    </a> 
+                                    @else
+
+                                    @endif
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                         <tfoot></tfoot>
@@ -87,20 +91,20 @@
 <script src="{{asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js')}}"></script> 
 
 <script>
-$(document).ready(function() {
-            $('#example1').DataTable( {
-                "language": { "sEmptyTable": "Nenhum registro encontrado",
-                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ".",
-                "sLengthMenu": "_MENU_ resultados por página",
-                "sLoadingRecords": "Carregando...",
-                "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum registro encontrado",
-                "sSearch": "Pesquisar",
-                "oPaginate": {
+$(document).ready(function () {
+    $('#example1').DataTable({
+        "language": {"sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
                 "sNext": "Próximo",
                 "sPrevious": "Anterior",
                 "sFirst": "Primeiro",
@@ -111,8 +115,8 @@ $(document).ready(function() {
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             }
         }
-    } );
-} );
+    });
+});
 </script>
 @stop
 

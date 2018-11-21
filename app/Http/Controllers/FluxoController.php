@@ -154,8 +154,8 @@ class FluxoController extends Controller
     public function detalhes($id)
     {
 
-        $fluxoatividades = Fluxoatividade::join('equipes', 'fluxoatividades.equipe_id', '=', 'equipes.id')
-            ->where('fluxo_id', '=', $id)->get();
+        $fluxoatividades = Fluxoatividade::where('fluxo_id', '=', $id)->get();
+
         $fluxos = Fluxo::where('id', '=', $id)->get();
 
         //dd($fluxoatividades);
@@ -198,12 +198,30 @@ class FluxoController extends Controller
 
     public function finalizar(Request $request, $id)
     {
-
         Fluxoatividade::where('id', '=', $id)
             ->update(['finalizado' => 1]);
 
-        $fluxos = $id;
-        //dd($fluxos);
+        $fluxo = Fluxoatividade::where('id', '=', $id)
+            ->value('fluxo_id');
+
+        $fluxos = Fluxoatividade::where('fluxo_id', '=', $fluxo)
+            ->where('finalizado', '<>', 1)
+            ->min('precedencia');
+
+        $teste = FluxoAtividade::join('equipes', 'equipe_id', '=', 'equipes.id')
+            ->select('fluxoatividades.id', 'fluxoatividades.equipe_id', 'equipes.user_id')
+            ->where([
+                ['precedencia', '=', $fluxos],
+                ['fluxo_id', '=', $fluxo],
+            ])->get();
+
+        for ($i = 0; $i < count($teste); $i++) {
+            Notificacao::create([
+                'user_id' => $teste[$i]->user_id,
+                'atividade_id' => $teste[$i]->id,
+            ]);
+        }
+
         return redirect()->route('fluxos.index');
     }
 
