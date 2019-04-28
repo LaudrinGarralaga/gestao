@@ -63,6 +63,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 - Clone o projeto para dentro do seu servidor
 - Vá até a pasta raiz do projeto
-- Use o comando composer install --no--scrips
+- Use o comando composer install --no--scripts
 - Depois use o comando cp .env.example .env
 - Depois use o comando php artisan key:generate
