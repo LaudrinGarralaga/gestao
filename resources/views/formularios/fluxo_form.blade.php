@@ -46,13 +46,13 @@
                     {{ csrf_field() }}
                     <div class="col-sm-5">
                         <div class="form-group">
-                            <label for="descricao">Descrição da Sequência:</label>
+                            <label for="descricao">Descrição do sistema:</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-info"></i>
                                 </div>    
                                 <input type="text" class="form-control" id="descricao" 
-                                    name="descricao" placeholder="Digite o descrição da sequência"
+                                    name="descricao" placeholder="Digite a descrição do sistema"
                                     value="{{$reg->descricao or old('descricao')}}"                   
                                     required>
                             </div>
